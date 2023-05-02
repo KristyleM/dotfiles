@@ -172,6 +172,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "regex",
   "rust",
   "go",
+  "gomod",
   "python",
 }
 
@@ -182,7 +183,10 @@ lvim.builtin.treesitter.ensure_installed = {
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
+  "rust_analyzer",
+  "gopls",
+})
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
 
@@ -422,6 +426,11 @@ lvim.plugins = {
     end
   },
   -- { "hrsh7th/cmp-nvim-lsp-signature-help" },
+  -- -----------------------------------------------------------
+  -- Go language config following
+  "olexsmir/gopher.nvim",
+  "leoluz/nvim-dap-go",
+  -- -----------------------------------------------------------
 }
 
 -- nvim-window-picker key config here
@@ -456,11 +465,113 @@ vim.keymap.set('n', '\\X', swap_windows, { desc = 'Swap windows' })
 -- })
 
 
--- config rust ide --
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "stylua", filetypes = { "lua" } },
--- }
+---------------------------------------------------------------------------------
+------------------------
+-- Format for go
+------------------------
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  -- { command = "stylua", filetypes = { "lua" } },
+  { command = "goimports", filetypes = { "go" } },
+  { command = "gofumpt", filetypes = { "go" } },
+}
+
+lvim.format_on_save = {
+  pattern = { "*.go" },
+}
+
+------------------------
+-- Dap
+------------------------
+local dap_ok, dapgo = pcall(require, "dap-go")
+if not dap_ok then
+  return
+end
+
+dapgo.setup()
+
+---------------------------------------------------------------------------------
+------------------------
+-- LSP
+------------------------
+-- config skip lsp server
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
+  "rust_analyzer",  -- rust
+  "gopls",  -- go
+})
+
+-- go
+local lsp_manager = require "lvim.lsp.manager"
+lsp_manager.setup("golangci_lint_ls", {
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+})
+
+lsp_manager.setup("gopls", {
+  on_attach = function(client, bufnr)
+    require("lvim.lsp").common_on_attach(client, bufnr)
+    local _, _ = pcall(vim.lsp.codelens.refresh)
+    local map = function(mode, lhs, rhs, desc)
+      if desc then
+        desc = desc
+      end
+
+      vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
+    end
+    map("n", "<leader>Ci", "<cmd>GoInstallDeps<Cr>", "Install Go Dependencies")
+    map("n", "<leader>Ct", "<cmd>GoMod tidy<cr>", "Tidy")
+    map("n", "<leader>Ca", "<cmd>GoTestAdd<Cr>", "Add Test")
+    map("n", "<leader>CA", "<cmd>GoTestsAll<Cr>", "Add All Tests")
+    map("n", "<leader>Ce", "<cmd>GoTestsExp<Cr>", "Add Exported Tests")
+    map("n", "<leader>Cg", "<cmd>GoGenerate<Cr>", "Go Generate")
+    map("n", "<leader>Cf", "<cmd>GoGenerate %<Cr>", "Go Generate File")
+    map("n", "<leader>Cc", "<cmd>GoCmt<Cr>", "Generate Comment")
+    map("n", "<leader>DT", "<cmd>lua require('dap-go').debug_test()<cr>", "Debug Test")
+  end,
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+  settings = {
+    gopls = {
+      usePlaceholders = true,
+      gofumpt = true,
+      codelenses = {
+        generate = false,
+        gc_details = true,
+        test = true,
+        tidy = true,
+      },
+    },
+  },
+})
+
+local status_ok, gopher = pcall(require, "gopher")
+if not status_ok then
+  return
+end
+
+gopher.setup {
+  commands = {
+    go = "go",
+    gomodifytags = "gomodifytags",
+    gotests = "gotests",
+    impl = "impl",
+    iferr = "iferr",
+  },
+}
+
+------------------
+
+-- 
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------
+
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
 local codelldb_adapter = {
   type = "server",
