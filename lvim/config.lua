@@ -518,15 +518,15 @@ lsp_manager.setup("gopls", {
 
       vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
     end
-    map("n", "<leader>Ci", "<cmd>GoInstallDeps<Cr>", "Install Go Dependencies")
-    map("n", "<leader>Ct", "<cmd>GoMod tidy<cr>", "Tidy")
-    map("n", "<leader>Ca", "<cmd>GoTestAdd<Cr>", "Add Test")
-    map("n", "<leader>CA", "<cmd>GoTestsAll<Cr>", "Add All Tests")
-    map("n", "<leader>Ce", "<cmd>GoTestsExp<Cr>", "Add Exported Tests")
-    map("n", "<leader>Cg", "<cmd>GoGenerate<Cr>", "Go Generate")
-    map("n", "<leader>Cf", "<cmd>GoGenerate %<Cr>", "Go Generate File")
-    map("n", "<leader>Cc", "<cmd>GoCmt<Cr>", "Generate Comment")
-    map("n", "<leader>DT", "<cmd>lua require('dap-go').debug_test()<cr>", "Debug Test")
+    map("n", "<leader>Gi", "<cmd>GoInstallDeps<Cr>", "Install Go Dependencies")
+    map("n", "<leader>Gt", "<cmd>GoMod tidy<cr>", "Tidy")
+    map("n", "<leader>Ga", "<cmd>GoTestAdd<Cr>", "Add Test")
+    map("n", "<leader>GA", "<cmd>GoTestsAll<Cr>", "Add All Tests")
+    map("n", "<leader>Ge", "<cmd>GoTestsExp<Cr>", "Add Exported Tests")
+    map("n", "<leader>Gg", "<cmd>GoGenerate<Cr>", "Go Generate")
+    map("n", "<leader>Gf", "<cmd>GoGenerate %<Cr>", "Go Generate File")
+    map("n", "<leader>Gc", "<cmd>GoCmt<Cr>", "Generate Comment")
+    map("n", "<leader>GDT", "<cmd>lua require('dap-go').debug_test()<cr>", "Debug Test")
   end,
   on_init = require("lvim.lsp").common_on_init,
   capabilities = require("lvim.lsp").common_capabilities(),
@@ -662,7 +662,7 @@ end
 
 vim.api.nvim_set_keymap("n", "<m-d>", "<cmd>RustOpenExternalDocs<Cr>", { noremap = true, silent = true })
 
-lvim.builtin.which_key.mappings["C"] = {
+lvim.builtin.which_key.mappings["R"] = {
   name = "Rust",
   r = { "<cmd>RustRunnables<Cr>", "Runnables" },
   t = { "<cmd>lua _CARGO_TEST()<cr>", "Cargo Test" },
@@ -682,6 +682,8 @@ lvim.builtin.which_key.mappings["C"] = {
   f = { "<cmd>lua require'crates'.show_features_popup()<cr>", "[crates] show features" },
   D = { "<cmd>lua require'crates'.show_dependencies_popup()<cr>", "[crates] show dependencies" },
 }
+lvim.builtin.which_key.mappings["G"] = { name = "Go" }
+lvim.builtin.which_key.mappings["D"] = { name = "Debug" }
 
 ------------------------------------------------------config rust ide over ------------------------------------------
 
