@@ -174,6 +174,8 @@ lvim.builtin.treesitter.ensure_installed = {
   "go",
   "gomod",
   "python",
+  "html",
+  "json",
 }
 
 -- -- generic LSP settings <https://www.lunarvim.org/docs/configuration/language-features/language-servers>
@@ -431,6 +433,14 @@ lvim.plugins = {
   "olexsmir/gopher.nvim",
   "leoluz/nvim-dap-go",
   -- -----------------------------------------------------------
+  -- -----------------------------------------------------------
+  -- Python language config following
+  "ChristianChiarulli/swenv.nvim",
+  "stevearc/dressing.nvim",
+  "mfussenegger/nvim-dap-python",
+  "nvim-neotest/neotest",
+  "nvim-neotest/neotest-python",
+  -- -----------------------------------------------------------
 }
 
 -- nvim-window-picker key config here
@@ -467,18 +477,26 @@ vim.keymap.set('n', '\\X', swap_windows, { desc = 'Swap windows' })
 
 ---------------------------------------------------------------------------------
 ------------------------
--- Format for go
+-- Format config
 ------------------------
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   -- { command = "stylua", filetypes = { "lua" } },
   { command = "goimports", filetypes = { "go" } },
   { command = "gofumpt", filetypes = { "go" } },
+  { name = "black"},
 }
 
-lvim.format_on_save = {
-  pattern = { "*.go" },
-}
+-- lvim.format_on_save.enabled = true
+-- lvim.format_on_save = {
+--   pattern = { "*.go", "*.py" },
+-- }
+
+------------------------
+-- Linter config
+------------------------
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup { { command = "flake8", filetypes = { "python" } } }
 
 ------------------------
 -- Dap
@@ -565,14 +583,12 @@ gopher.setup {
 
 
 
-
-
-
-
-
+-- setup debug adapter
 ---------------------------------------------------------------------------------
-
+lvim.builtin.dap.active = true
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
+
+-- for rust
 local codelldb_adapter = {
   type = "server",
   port = "${port}",
@@ -662,6 +678,31 @@ end
 
 vim.api.nvim_set_keymap("n", "<m-d>", "<cmd>RustOpenExternalDocs<Cr>", { noremap = true, silent = true })
 
+-- Rust over
+-- Python dap config
+--
+pcall(function()
+  require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
+end)
+-- setup testing
+require("neotest").setup({
+  adapters = {
+    require("neotest-python")({
+      -- Extra arguments for nvim-dap configuration
+      -- See https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for values
+      dap = {
+        justMyCode = false,
+        console = "integratedTerminal",
+      },
+      args = { "--log-level", "DEBUG", "--quiet" },
+      runner = "pytest",
+    })
+  }
+})
+
+
+-- Python over
+
 lvim.builtin.which_key.mappings["R"] = {
   name = "Rust",
   r = { "<cmd>RustRunnables<Cr>", "Runnables" },
@@ -691,4 +732,29 @@ lvim.builtin.which_key.mappings["D"] = { name = "Debug" }
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
   command = "set tabstop=2  shiftwidth=2"
+})
+
+-- NOTE: the following keybinds are wrapped in an filetype autocommand so they are only active in python files
+-- you could also add the code in the callback function to lvim/ftplugin/python.lua
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "python" },
+  callback = function()
+    lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('neotest').run.run()<cr>",
+      "Test Method" }
+    lvim.builtin.which_key.mappings["dM"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
+      "Test Method DAP" }
+    lvim.builtin.which_key.mappings["df"] = {
+      "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", "Test Class" }
+    lvim.builtin.which_key.mappings["dF"] = {
+      "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Test Class DAP" }
+    lvim.builtin.which_key.mappings["dS"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
+    lvim.builtin.which_key.vmappings["d"] = {
+      name = "Debug",
+      s = { "<cmd>lua require('dap-python').debug_selection()<cr>", "Debug Selection" },
+    }
+    lvim.builtin.which_key.mappings["C"] = {
+      name = "Python",
+      c = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
+    }
+  end,
 })
