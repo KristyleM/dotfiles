@@ -480,9 +480,19 @@ vim.keymap.set('n', '\\X', swap_windows, { desc = 'Swap windows' })
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   -- { command = "stylua", filetypes = { "lua" } },
-  { command = "goimports", filetypes = { "go" } },
-  { command = "gofumpt", filetypes = { "go" } },
-  { name = "black"},
+  { 
+    command = "goimports", 
+    filetypes = { "go" } 
+  },
+  { 
+    command = "gofumpt", 
+    filetypes = { "go" } 
+  },
+  { 
+    name = "black", 
+    args = {"--line-length", "80"},
+    filetypes = { "python" },
+  },
 }
 
 -- lvim.format_on_save.enabled = true
@@ -494,7 +504,13 @@ formatters.setup {
 -- Linter config
 ------------------------
 local linters = require "lvim.lsp.null-ls.linters"
-linters.setup { { command = "flake8", filetypes = { "python" } } }
+linters.setup { 
+  { 
+    command = "flake8", 
+    args = {"--max-line-length", "120"},
+    filetypes = { "python" } ,
+  } 
+}
 
 ------------------------
 -- Dap
