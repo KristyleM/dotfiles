@@ -49,9 +49,7 @@ lvim.keys.visual_mode["L"] = "$"
 lvim.keys.visual_mode["<C-j>"] = "5j"
 lvim.keys.visual_mode["<C-k>"] = "5k"
 
-
-lvim.keys.insert_mode["<C-k>"] = "5k"
-
+lvim.keys.visual_mode["<leader>Sv"] = "<esc><cmd>lua require('spectre').open_visual()<CR>" -- Spectre config
 
 -- tletescope
 lvim.keys.normal_mode["<leader>r"] =":Telescope oldfiles<CR>"
@@ -418,9 +416,9 @@ lvim.plugins = {
       require("spectre").setup()
     end,
   },
-  { 'marko-cerovac/material.nvim' }, --theme
+  { 'marko-cerovac/material.nvim' }, -- theme
   { 
-    'navarasu/onedark.nvim',
+    'navarasu/onedark.nvim', -- theme
     config = function()
       require("onedark").setup {
         style = "darker",
@@ -724,10 +722,17 @@ lvim.builtin.which_key.mappings["R"] = {
   D = { "<cmd>lua require'crates'.show_dependencies_popup()<cr>", "[crates] show dependencies" },
 }
 lvim.builtin.which_key.mappings["G"] = { name = "Go" }
-lvim.builtin.which_key.mappings["D"] = { name = "Debug" }
+-- lvim.builtin.which_key.mappings["D"] = { name = "Debug" }
 
 ------------------------------------------------------config rust ide over ------------------------------------------
 
+-- Spectre key mapping here:
+lvim.builtin.which_key.mappings["S"] = {
+  name = "Spectre",
+  S = { "<cmd>lua require('spectre').open()<CR>", "Open Spectre" },
+  w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search current word" },
+  p = { "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", "Search on current file" },
+}
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
