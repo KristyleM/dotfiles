@@ -54,6 +54,8 @@ lvim.keys.visual_mode["<leader>Sv"] = "<esc><cmd>lua require('spectre').open_vis
 -- tletescope
 lvim.keys.normal_mode["<leader>r"] =":Telescope oldfiles<CR>"
 
+-- lsp config
+lvim.keys.normal_mode["<leader>lD"] = ":lua vim.diagnostics.open_float()<CR>"
 -- lvim.builtin.which_key.mappings.f   = nil
 -- lvim.builtin.which_key.mappings.s   = nil
 -- lvim.keys.normal_mode["<leader>s"]  = ":lua require('telescope.builtin').lsp_document_symbols()<cr>"
@@ -428,16 +430,16 @@ lvim.plugins = {
   -- { "hrsh7th/cmp-nvim-lsp-signature-help" },
   -- -----------------------------------------------------------
   -- Go language config following
-  "olexsmir/gopher.nvim",
-  "leoluz/nvim-dap-go",
+  { "olexsmir/gopher.nvim" },
+  { "leoluz/nvim-dap-go" },
   -- -----------------------------------------------------------
   -- -----------------------------------------------------------
   -- Python language config following
-  "ChristianChiarulli/swenv.nvim",
-  "stevearc/dressing.nvim",
-  "mfussenegger/nvim-dap-python",
-  "nvim-neotest/neotest",
-  "nvim-neotest/neotest-python",
+  { "ChristianChiarulli/swenv.nvim" },
+  { "stevearc/dressing.nvim" },
+  { "mfussenegger/nvim-dap-python" },
+  { "nvim-neotest/neotest" },
+  { "nvim-neotest/neotest-python" },
   -- -----------------------------------------------------------
 }
 
