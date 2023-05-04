@@ -55,7 +55,7 @@ lvim.keys.visual_mode["<leader>Sv"] = "<esc><cmd>lua require('spectre').open_vis
 lvim.keys.normal_mode["<leader>r"] =":Telescope oldfiles<CR>"
 
 -- lsp config
-lvim.keys.normal_mode["<leader>lD"] = ":lua vim.diagnostic.open_float()<CR>"
+lvim.keys.normal_mode["<leader>lD"] = ":lua vim.diagnostics.open_float()<CR>"
 -- lvim.builtin.which_key.mappings.f   = nil
 -- lvim.builtin.which_key.mappings.s   = nil
 -- lvim.keys.normal_mode["<leader>s"]  = ":lua require('telescope.builtin').lsp_document_symbols()<cr>"
