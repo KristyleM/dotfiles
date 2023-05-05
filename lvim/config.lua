@@ -54,6 +54,8 @@ lvim.keys.visual_mode["<leader>Sv"] = "<esc><cmd>lua require('spectre').open_vis
 -- tletescope
 lvim.keys.normal_mode["<leader>r"] =":Telescope oldfiles<CR>"
 
+lvim.keys.normal_mode["<leader>o"] =":NvimTreeFocus<CR>"
+
 -- lsp config
 lvim.keys.normal_mode["<leader>lD"] = ":lua vim.diagnostic.open_float()<CR>"
 -- lvim.builtin.which_key.mappings.f   = nil
@@ -156,6 +158,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "python",
   "html",
   "json",
+  "lua",
 }
 
 -- -- generic LSP settings <https://www.lunarvim.org/docs/configuration/language-features/language-servers>

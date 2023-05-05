@@ -31,6 +31,13 @@ M.config = function()
       end
     },
     {
+      "ray-x/lsp_signature.nvim",
+      config = function()
+        require("user.plugins.lsp_signature").config()
+      end,
+      event = { "BufRead", "BufNew" },
+    },
+    {
       "phaazon/hop.nvim",
       event = "VeryLazy",
       config = function()
