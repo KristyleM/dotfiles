@@ -38,6 +38,22 @@ M.config = function()
       event = { "BufRead", "BufNew" },
     },
     {
+      "sindrets/diffview.nvim",
+      lazy = true,
+      cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
+      keys = { "<leader>gd", "<leader>gh" },
+      config = function()
+        require("user.plugins.diffview").config()
+      end,
+    },
+    {
+      "simrat39/symbols-outline.nvim",
+      config = function()
+        require("user.plugins.symbols_outline").config()
+      end,
+      event = "BufReadPost",
+    },
+    {
       "phaazon/hop.nvim",
       event = "VeryLazy",
       config = function()
