@@ -61,26 +61,6 @@ lvim.keys.normal_mode["<leader>lD"] = ":lua vim.diagnostic.open_float()<CR>"
 -- lvim.keys.normal_mode["<leader>s"]  = ":lua require('telescope.builtin').lsp_document_symbols()<cr>"
 -- lvim.keys.normal_mode["<leader>S"]  = ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>"
 
---
--- hop
-lvim.keys.normal_mode["f"] = "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
-lvim.keys.normal_mode["F"] = "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
-lvim.keys.visual_mode["f"] = "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
-lvim.keys.visual_mode["F"] = "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
-
-lvim.keys.normal_mode["\\l"] = ":HopLine<CR>"
-lvim.keys.normal_mode["\\L"] = ":HopLineStart<CR>"
-lvim.keys.normal_mode["\\gL"] = ":HopLineMW<CR>"
-
-lvim.keys.normal_mode["\\f"] = ":HopPattern<CR>"
-lvim.keys.normal_mode["\\gf"] = ":HopPatternMW<CR>"
-
-lvim.keys.normal_mode["\\w"] = ":HopWord<CR>"
-lvim.keys.normal_mode["\\gw"] = ":HopWordMW<CR>"
-
-lvim.keys.normal_mode["\\v"] = ":HopVertical<CR>"
-lvim.keys.normal_mode["\\gv"] = ":HopVerticalMW<CR>"
-
 -------------------------------------------------------------------------------------
 
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }

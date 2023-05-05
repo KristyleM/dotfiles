@@ -32,11 +32,9 @@ M.config = function()
     },
     {
       "phaazon/hop.nvim",
-      event = "BufRead",
+      event = "VeryLazy",
       config = function()
-        require("hop").setup()
-        vim.api.nvim_set_keymap("n", "\\s", ":HopChar2<CR>", { silent = true })
-        vim.api.nvim_set_keymap("n", "\\gs", ":HopWord<CR>", { silent = true })
+        require("user.plugins.hop").config()
       end,
     },
     {
