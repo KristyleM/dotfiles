@@ -8,6 +8,7 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.relativenumber = false
 vim.opt.colorcolumn = "120"
+vim.opt.timeoutlen = 300
 
 -- general
 lvim.log.level = "warn"
@@ -54,6 +55,8 @@ lvim.keys.visual_mode["<leader>Sv"] = "<esc><cmd>lua require('spectre').open_vis
 -- tletescope
 lvim.keys.normal_mode["<leader>r"] =":Telescope oldfiles<CR>"
 
+lvim.keys.normal_mode["<leader>o"] =":NvimTreeFocus<CR>"
+
 -- lsp config
 lvim.keys.normal_mode["<leader>lD"] = ":lua vim.diagnostic.open_float()<CR>"
 -- lvim.builtin.which_key.mappings.f   = nil
@@ -61,27 +64,11 @@ lvim.keys.normal_mode["<leader>lD"] = ":lua vim.diagnostic.open_float()<CR>"
 -- lvim.keys.normal_mode["<leader>s"]  = ":lua require('telescope.builtin').lsp_document_symbols()<cr>"
 -- lvim.keys.normal_mode["<leader>S"]  = ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>"
 
---
--- hop
-lvim.keys.normal_mode["f"] = "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
-lvim.keys.normal_mode["F"] = "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
-lvim.keys.visual_mode["f"] = "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
-lvim.keys.visual_mode["F"] = "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
-
-lvim.keys.normal_mode["\\l"] = ":HopLine<CR>"
-lvim.keys.normal_mode["\\L"] = ":HopLineStart<CR>"
-lvim.keys.normal_mode["\\gL"] = ":HopLineMW<CR>"
-
-lvim.keys.normal_mode["\\f"] = ":HopPattern<CR>"
-lvim.keys.normal_mode["\\gf"] = ":HopPatternMW<CR>"
-
-lvim.keys.normal_mode["\\w"] = ":HopWord<CR>"
-lvim.keys.normal_mode["\\gw"] = ":HopWordMW<CR>"
-
-lvim.keys.normal_mode["\\v"] = ":HopVertical<CR>"
-lvim.keys.normal_mode["\\gv"] = ":HopVerticalMW<CR>"
-
 -------------------------------------------------------------------------------------
+--
+lvim.builtin.which_key.mappings["gd"] = { "<cmd>DiffviewOpen<cr>", "diffview: diff HEAD" }
+lvim.builtin.which_key.mappings["gh"] = { "<cmd>DiffviewFileHistory<cr>", "diffview: filehistory" }
+lvim.builtin.which_key.mappings["lo"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
 
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
@@ -176,6 +163,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "python",
   "html",
   "json",
+  "lua",
 }
 
 -- -- generic LSP settings <https://www.lunarvim.org/docs/configuration/language-features/language-servers>

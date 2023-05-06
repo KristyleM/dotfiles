@@ -31,12 +31,33 @@ M.config = function()
       end
     },
     {
-      "phaazon/hop.nvim",
-      event = "BufRead",
+      "ray-x/lsp_signature.nvim",
       config = function()
-        require("hop").setup()
-        vim.api.nvim_set_keymap("n", "\\s", ":HopChar2<CR>", { silent = true })
-        vim.api.nvim_set_keymap("n", "\\gs", ":HopWord<CR>", { silent = true })
+        require("user.plugins.lsp_signature").config()
+      end,
+      event = { "BufRead", "BufNew" },
+    },
+    {
+      "sindrets/diffview.nvim",
+      lazy = true,
+      cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
+      keys = { "<leader>gd", "<leader>gh" },
+      config = function()
+        require("user.plugins.diffview").config()
+      end,
+    },
+    {
+      "simrat39/symbols-outline.nvim",
+      config = function()
+        require("user.plugins.symbols_outline").config()
+      end,
+      event = "BufReadPost",
+    },
+    {
+      "phaazon/hop.nvim",
+      event = "VeryLazy",
+      config = function()
+        require("user.plugins.hop").config()
       end,
     },
     {
