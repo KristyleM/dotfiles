@@ -30,6 +30,7 @@ M.config = function()
         }
       end
     },
+    require("user.plugins.lspsaga"),
     {
       "ray-x/lsp_signature.nvim",
       config = function()

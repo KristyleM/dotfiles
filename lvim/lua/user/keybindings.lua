@@ -128,16 +128,16 @@ lvim.builtin.which_key.mappings["gd"] = { "<cmd>DiffviewOpen<cr>", "diffview: di
 lvim.builtin.which_key.mappings["gh"] = { "<cmd>DiffviewFileHistory<cr>", "diffview: filehistory" }
 
 -- todo-comments
--- local todo_ok = pcall(require, "todo-comments")
--- wkeymappings['t']['t'] = { name = '+todo comments' }
--- if todo_ok then
---   local cmd = ':TodoLocList<cr>'
---   if trouble_ok then
---     cmd = ':TodoTrouble<cr>'
---   end
---   wkeymappings['f']['t']['c'] = { cmd, 'Todos' }
--- else
--- end
+local todo_ok = pcall(require, "todo-comments")
+wkeymappings['t']['t'] = { name = '+todo comments' }
+if todo_ok then
+  local cmd = ':TodoLocList<cr>'
+  if trouble_ok then
+    cmd = ':TodoTrouble<cr>'
+  end
+  wkeymappings['t']['t']['c'] = { cmd, 'Todos' }
+else
+end
 
 -- gitsigns
 local status_gitsigns_ok = pcall(require, "gitsigns")
@@ -186,6 +186,25 @@ local status_nvim_spectre_ok = pcall(require, 'spectre')
 if (status_nvim_spectre_ok) then
   wkeymappings['s']['v'] = { ':lua require("spectre").open_visual()<cr>', 'Find text' }
   wkeymappings['s']['p'] = { ':lua require("spectre").open_file_search()<cr>', 'Find text current file path' }
+end
+
+-- lspsaga
+local status_lspsaga_ok = pcall(require, "lspsaga")
+if status_lspsaga_ok then
+  keymap('n', '<C-j>', ':Lspsaga diagnostic_jump_next<CR>')
+  keymap('n', 'J', ':Lspsaga diagnostic_jump_prev<CR>')
+  keymap('n', '<C-k>', ':Lspsaga hover_doc ++quiet<CR>')
+  -- removed
+  -- https://github.com/glepnir/lspsaga.nvim/issues/502#issuecomment-1236949596
+  -- keymap('i', '<C-k>', '<Cmd>Lspsaga signature_help<CR>')
+  keymap('i', '<C-k>', ':lua vim.lsp.buf.signature_help()<CR>')
+  wkeymappings['l'] = {
+    d = { ':Lspsaga lsp_finder<cr>', 'LSP finder' },
+    p = { ':Lspsaga peek_definition<cr>', 'Peek definition' },
+    r = { ':Lspsaga rename<cr>', 'LSP rename' },
+    O = { ':Lspsaga outline<cr>', 'LSP ouline' },
+    a = { ':Lspsaga code_action<cr>', 'LSP code action' },
+  }
 end
 
 -- map to global
