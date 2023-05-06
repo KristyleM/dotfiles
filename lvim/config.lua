@@ -22,100 +22,17 @@ vim.opt.foldlevel = 99
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()" 
 
--- to disable icons and use a minimalist setup, uncomment the following
--- lvim.use_icons = false
-
--- keymappings <https://www.lunarvim.org/docs/configuration/keybindings>
-lvim.leader = "space"
--- add your own keymapping
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
-lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
-
-
-lvim.keys.normal_mode["<C-j>"] = "5j"
-lvim.keys.normal_mode["<C-k>"] = "5k"
-lvim.keys.normal_mode["H"] = "^"
-lvim.keys.normal_mode["L"] = "$"
-lvim.keys.normal_mode["U"] = "<c-R>"
--- lvim.keys.normal_mode["\\w"] = ":"
--- lvim.keys.normal_mode["\\W"] = "<c-R>"
--- lvim.keys.normal_mode["<leader>q"] = ":bd<CR>" -- quit and clear current tab
-
--- move lines
-lvim.keys.visual_mode["J"] = ":m '>+1<CR>gv=gv"
-lvim.keys.visual_mode["K"] = ":m '<-2<CR>gv=gv"
-lvim.keys.visual_mode["H"] = "^"
-lvim.keys.visual_mode["L"] = "$"
-lvim.keys.visual_mode["<C-j>"] = "5j"
-lvim.keys.visual_mode["<C-k>"] = "5k"
+require("user.keybindings")
 
 lvim.keys.visual_mode["<leader>Sv"] = "<esc><cmd>lua require('spectre').open_visual()<CR>" -- Spectre config
 
--- tletescope
-lvim.keys.normal_mode["<leader>r"] =":Telescope oldfiles<CR>"
-
-lvim.keys.normal_mode["<leader>o"] =":NvimTreeFocus<CR>"
-
 -- lsp config
 lvim.keys.normal_mode["<leader>lD"] = ":lua vim.diagnostic.open_float()<CR>"
--- lvim.builtin.which_key.mappings.f   = nil
--- lvim.builtin.which_key.mappings.s   = nil
--- lvim.keys.normal_mode["<leader>s"]  = ":lua require('telescope.builtin').lsp_document_symbols()<cr>"
--- lvim.keys.normal_mode["<leader>S"]  = ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>"
 
 -------------------------------------------------------------------------------------
 --
-lvim.builtin.which_key.mappings["gd"] = { "<cmd>DiffviewOpen<cr>", "diffview: diff HEAD" }
-lvim.builtin.which_key.mappings["gh"] = { "<cmd>DiffviewFileHistory<cr>", "diffview: filehistory" }
 lvim.builtin.which_key.mappings["lo"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
 
-lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-  t = { "<cmd>TodoTrouble<cr>", "Todo" }
-}
-
------------------------------
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
-local _, actions = pcall(require, "telescope.actions")
-lvim.builtin.telescope.defaults.mappings = {
-  -- for input mode
-  i = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-    ["<C-n>"] = actions.cycle_history_next,
-    ["<C-p>"] = actions.cycle_history_prev,
-  },
-  -- for normal mode
-  n = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-  },
-}
-
-
-
------------------------------------
-
--- -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-
--- -- Change theme settings
--- -- Color Scheme config here
--- lvim.colorscheme = "PaperColor"
---
--- lvim.colorscheme = "material"
--- vim.g.material_style = "darker"
---
 
 lvim.colorscheme = "onedark"
 --------------------------------------------------------------------------------
@@ -177,76 +94,10 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
   "rust_analyzer",
   "gopls",
 })
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pyright", opts)
-
--- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. IMPORTANT: Requires `:LvimCacheReset` to take effect
--- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
--- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
---   return server ~= "emmet_ls"
--- end, lvim.lsp.automatic_configuration.skipped_servers)
-
--- -- you can set a custom on_attach function that will be used for all the language servers
--- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
-
--- -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "stylua" },
---   {
---     command = "prettier",
---     extra_args = { "--print-width", "100" },
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
--- local linters = require "lvim.lsp.null-ls.linters"
--- linters.setup {
---   { command = "flake8", filetypes = { "python" } },
---   {
---     command = "shellcheck",
---     args = { "--severity", "warning" },
---   },
--- }
--- local code_actions = require "lvim.lsp.null-ls.code_actions"
--- code_actions.setup {
---   {
---     exe = "eslint",
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
 
 -- -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 require("user.plugins").config()
 
--- nvim-window-picker key config here
-local picker = require('window-picker')
-
-vim.keymap.set("n", "\\x", function()
-  local picked_window_id = picker.pick_window({
-    include_current_win = true
-  }) or vim.api.nvim_get_current_win()
-  vim.api.nvim_set_current_win(picked_window_id)
-end, { desc = "Pick a window" })
-
-local function swap_windows()
-  local window = picker.pick_window({
-    include_current_win = false
-  })
-  local target_buffer = vim.fn.winbufnr(window)
-  -- Set the target window to contain current buffer
-  vim.api.nvim_win_set_buf(window, 0)
-  -- Set current window to contain target buffer
-  vim.api.nvim_win_set_buf(0, target_buffer)
-end
-
-vim.keymap.set('n', '\\X', swap_windows, { desc = 'Swap windows' })
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "zsh",
