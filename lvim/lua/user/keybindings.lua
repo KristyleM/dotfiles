@@ -203,7 +203,7 @@ end
 local surround_ok, surround = pcall(require, 'surround-ui')
 if surround_ok then
   surround.setup {
-    root_key = 'S'
+    root_key = 's'
   }
 end
 

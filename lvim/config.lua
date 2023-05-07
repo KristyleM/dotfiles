@@ -24,19 +24,6 @@ table.insert(lvim.builtin.cmp.sources, {
 	name = "nvim_lsp_signature_help",
 })
 
--- copilot-cmp config here, an AI plugin
--- table.insert(lvim.plugins, {
---   "zbirenbaum/copilot-cmp",
---   event = "InsertEnter",
---   dependencies = { "zbirenbaum/copilot.lua" },
---   config = function()
---     vim.defer_fn(function()
---       require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
---       require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
---     end, 100)
---   end,
--- })
-
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
 
@@ -76,7 +63,10 @@ require("user.plugins").config()
 ------------------------
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-	{ command = "stylua", filetypes = { "lua" } },
+	{ 
+    command = "stylua", 
+    filetypes = { "lua" } 
+  },
 	{
 		command = "goimports",
 		filetypes = { "go" },
@@ -105,17 +95,6 @@ linters.setup({
 })
 
 ------------------------
--- Dap
-------------------------
-local dap_ok, dapgo = pcall(require, "dap-go")
-if not dap_ok then
-	return
-end
-
-dapgo.setup()
-
----------------------------------------------------------------------------------
-------------------------
 -- LSP
 ------------------------
 -- config skip lsp server
@@ -124,70 +103,9 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
 	"gopls", -- go
 })
 
--- go
-local lsp_manager = require("lvim.lsp.manager")
-lsp_manager.setup("golangci_lint_ls", {
-	on_init = require("lvim.lsp").common_on_init,
-	capabilities = require("lvim.lsp").common_capabilities(),
-})
+-- for go
+require("language.go")
 
-lsp_manager.setup("gopls", {
-	on_attach = function(client, bufnr)
-		require("lvim.lsp").common_on_attach(client, bufnr)
-		local _, _ = pcall(vim.lsp.codelens.refresh)
-		local map = function(mode, lhs, rhs, desc)
-			if desc then
-				desc = desc
-			end
-
-			vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
-		end
-		map("n", "<leader>Gi", "<cmd>GoInstallDeps<Cr>", "Install Go Dependencies")
-		map("n", "<leader>Gt", "<cmd>GoMod tidy<cr>", "Tidy")
-		map("n", "<leader>Ga", "<cmd>GoTestAdd<Cr>", "Add Test")
-		map("n", "<leader>GA", "<cmd>GoTestsAll<Cr>", "Add All Tests")
-		map("n", "<leader>Ge", "<cmd>GoTestsExp<Cr>", "Add Exported Tests")
-		map("n", "<leader>Gg", "<cmd>GoGenerate<Cr>", "Go Generate")
-		map("n", "<leader>Gf", "<cmd>GoGenerate %<Cr>", "Go Generate File")
-		map("n", "<leader>Gc", "<cmd>GoCmt<Cr>", "Generate Comment")
-		map("n", "<leader>GDT", "<cmd>lua require('dap-go').debug_test()<cr>", "Debug Test")
-	end,
-	on_init = require("lvim.lsp").common_on_init,
-	capabilities = require("lvim.lsp").common_capabilities(),
-	settings = {
-		gopls = {
-			usePlaceholders = true,
-			gofumpt = true,
-			codelenses = {
-				generate = false,
-				gc_details = true,
-				test = true,
-				tidy = true,
-			},
-		},
-	},
-})
-
-local status_ok, gopher = pcall(require, "gopher")
-if not status_ok then
-	return
-end
-
-gopher.setup({
-	commands = {
-		go = "go",
-		gomodifytags = "gomodifytags",
-		gotests = "gotests",
-		impl = "impl",
-		iferr = "iferr",
-	},
-})
-
-------------------
-
---
-
--- setup debug adapter
 ---------------------------------------------------------------------------------
 lvim.builtin.dap.active = true
 local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
