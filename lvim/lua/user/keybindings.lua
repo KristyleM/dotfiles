@@ -68,8 +68,8 @@ keymap("n", "<C-up>", "<C-w>-")
 keymap("n", "<C-down>", "<C-w>+")
 
 -- fast to move
-keymap("n", "<C-j>", "5j")
-keymap("n", "<C-k>", "5k")
+-- keymap("n", "<C-j>", "5j")
+-- keymap("n", "<C-k>", "5k")
 
 keymap("v", "<C-j>", "5j")
 keymap("v", "<C-k>", "5k")
