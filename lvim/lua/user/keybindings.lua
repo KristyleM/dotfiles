@@ -203,7 +203,7 @@ end
 local surround_ok, surround = pcall(require, 'surround-ui')
 if surround_ok then
   surround.setup {
-    root_key = 'S'
+    root_key = 's'
   }
 end
 
@@ -242,7 +242,7 @@ wkeymappings['v']['k'] = { '<Plug>(VM-Add-Cursor-Up)', 'add cursor up' }
 
 -------------------------------------- language keybindings-------------------------------------
 -- Rust
-wkeymappings['r'] = {
+wkelmappings['r'] = {
   name = "Rust",
   r = { "<cmd>RustRunnables<Cr>", "Runnables" },
   t = { "<cmd>lua _CARGO_TEST()<cr>", "Cargo Test" },
