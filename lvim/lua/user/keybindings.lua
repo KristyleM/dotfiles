@@ -96,6 +96,8 @@ wkeymappings['f'] = {
   w = { ':Telescope live_grep<cr>', 'Live Grep' },
   c = { ":Telescope git_status<cr>", "Open changed file" },
   p = { ":Telescope projects<CR>", "Projects" },
+  m = { ":Telescope marks<CR>", "Marks" },
+  r = { ":Telescope registers<CR>", "Registers" },
 }
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
@@ -169,8 +171,8 @@ end
 local hop_ok = pcall(require, "hop")
 if hop_ok then
   opts = { silent = true }
-  keymap("n", "\\s", ":HopChar2<CR>", { silent = true })
-  keymap("n", "\\gs", ":HopWordMW<CR>", { silent = true })
+  keymap("n", "\\s", "<md>HopChar2<CR>", { silent = true })
+  keymap("n", "\\gs", "<cmd>HopWordMW<CR>", { silent = true })
   
   keymap("n", "f", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", opts)
   keymap("n", "F", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", opts)
@@ -178,15 +180,15 @@ if hop_ok then
   keymap("v", "F", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", opts)
   keymap("", "t", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>", opts)
   keymap("", "T", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = -1 })<cr>", opts)
-  keymap("", "\\l", ":HopLine<CR>", opts)
-  keymap("", "\\L", ":HopLineStart<CR>", opts)
-  keymap("", "\\gl", ":HopLineMW<CR>", opts)
-  keymap("n", "\\f", ":HopPattern<CR>", opts)
-  keymap("n", "\\gf", ":HopPatternMW<CR>", opts)
-  keymap("n", "\\w", ":HopWord<CR>", opts)
-  keymap("n", "\\gw", ":HopWordMW<CR>", opts)
-  keymap("n", "\\v", ":HopVertical<CR>", opts)
-  keymap("n", "\\gv", ":HopVerticalMW<CR>", opts)
+  keymap("", "\\l", "<cmd>HopLine<CR>", opts)
+  keymap("", "\\L", "<cmd>HopLineStart<CR>", opts)
+  keymap("n", "\\gl", "<cmd>HopLineMW<CR>", opts)
+  keymap("", "\\f", "<cmd>HopPattern<CR>", opts)
+  keymap("n", "\\gf", "<cmd>HopPatternMW<CR>", opts)
+  keymap("", "\\w", "<cmd>HopWord<CR>", opts)
+  keymap("n", "\\gw", "<cmd>HopWordMW<CR>", opts)
+  keymap("", "\\v", "<cmd>HopVertical<CR>", opts)
+  keymap("n", "\\gv", "<cmd>HopVerticalMW<CR>", opts)
 end
 
 -- nvim-spectre
