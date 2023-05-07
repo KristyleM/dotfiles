@@ -260,6 +260,27 @@ wkeymappings['r'] = {
   D = { "<cmd>lua require'crates'.show_dependencies_popup()<cr>", "[crates] show dependencies" },
 }
 
+-- Python
+-- NOTE: the following keybinds are wrapped in an filetype autocommand so they are only active in python files
+-- you could also add the code in the callback function to lvim/ftplugin/python.lua
+wkeymappings['p'] = {
+  name = "Python",
+  d = {
+    name = "Debug",
+    m = { "<cmd>lua require('neotest').run.run()<cr>", "Test Method" },
+    M = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Test Method DAP" },
+    f = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", "Test Class" },
+    F = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Test Class DAP", },
+    S = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" },
+    V = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
+  }
+}
+
+lvim.builtin.which_key.vmappings["d"] = {
+  name = "Debug",
+  s = { "<cmd>lua require('dap-python').debug_selection()<cr>", "Debug Selection" },
+}
+
 -- map to global
 require("which-key").register({
   f = wkeymappings['f'],

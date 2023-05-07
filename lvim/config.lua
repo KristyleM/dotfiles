@@ -28,6 +28,10 @@ table.insert(lvim.builtin.cmp.sources, {
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
 
+-- -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
+require("user.plugins").config()
+
+
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
 
 -- -- always installed on startup, useful for parsers without a strict filetype
@@ -57,8 +61,6 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
 	"gopls",
 })
 
--- -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
-require("user.plugins").config()
 
 ------------------------
 -- Format config
@@ -108,62 +110,12 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
 -- language config
 require("language.go") -- for go
 require("language.rust") -- for rust
+require("language.python") -- for python
 
 ---------------------------------------------------------------------------------
-
--- Python dap config
-
-local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
-pcall(function()
-	require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
-end)
--- setup testing
-require("neotest").setup({
-	adapters = {
-		require("neotest-python")({
-			-- Extra arguments for nvim-dap configuration
-			-- See https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for values
-			dap = {
-				justMyCode = false,
-				console = "integratedTerminal",
-			},
-			args = { "--log-level", "DEBUG", "--quiet" },
-			runner = "pytest",
-		}),
-	},
-})
-
--- Python over
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lua",
 	command = "set tabstop=2  shiftwidth=2",
 })
 
--- NOTE: the following keybinds are wrapped in an filetype autocommand so they are only active in python files
--- you could also add the code in the callback function to lvim/ftplugin/python.lua
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "python" },
-	callback = function()
-		lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('neotest').run.run()<cr>", "Test Method" }
-		lvim.builtin.which_key.mappings["dM"] =
-			{ "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Test Method DAP" }
-		lvim.builtin.which_key.mappings["df"] = {
-			"<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>",
-			"Test Class",
-		}
-		lvim.builtin.which_key.mappings["dF"] = {
-			"<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>",
-			"Test Class DAP",
-		}
-		lvim.builtin.which_key.mappings["dS"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
-		lvim.builtin.which_key.vmappings["d"] = {
-			name = "Debug",
-			s = { "<cmd>lua require('dap-python').debug_selection()<cr>", "Debug Selection" },
-		}
-		lvim.builtin.which_key.mappings["C"] = {
-			name = "Python",
-			c = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
-		}
-	end,
-})
