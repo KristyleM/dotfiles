@@ -68,8 +68,8 @@ keymap("n", "<C-up>", "<C-w>-")
 keymap("n", "<C-down>", "<C-w>+")
 
 -- fast to move
-keymap("n", "<C-j>", "5j")
-keymap("n", "<C-k>", "5k")
+-- keymap("n", "<C-j>", "5j")
+-- keymap("n", "<C-k>", "5k")
 
 keymap("v", "<C-j>", "5j")
 keymap("v", "<C-k>", "5k")
@@ -239,6 +239,26 @@ wkeymappings['v']['d'] = { '<Plug>(VM-Find-Under)', 'select multi word, `n` next
 wkeymappings['v']['c'] = { '<Plug>(VM-Add-Cursor-At-Pos)', 'add cursor' }
 wkeymappings['v']['j'] = { '<Plug>(VM-Add-Cursor-Down)', 'add cursor down' }
 wkeymappings['v']['k'] = { '<Plug>(VM-Add-Cursor-Up)', 'add cursor up' }
+
+-------------------------------------- language keybindings-------------------------------------
+-- Rust
+wkeymappings['r'] = {
+  name = "Rust",
+  r = { "<cmd>RustRunnables<Cr>", "Runnables" },
+  t = { "<cmd>lua _CARGO_TEST()<cr>", "Cargo Test" },
+  m = { "<cmd>RustExpandMacro<Cr>", "Expand Macro" },
+  c = { "<cmd>RustOpenCargo<Cr>", "Open Cargo" },
+  p = { "<cmd>RustParentModule<Cr>", "Parent Module" },
+  d = { "<cmd>RustDebuggables<Cr>", "Debuggables" },
+  v = { "<cmd>RustViewCrateGraph<Cr>", "View Crate Graph" },
+  R = { "<cmd>lua require('rust-tools/workspace_refresh')._reload_workspace_from_cargo_toml()<Cr>", "Reload Workspace" },
+  o = { "<cmd>RustOpenExternalDocs<Cr>", "Open External Docs" },
+  y = { "<cmd>lua require'crates'.open_repository()<cr>", "[crates] open repository" },
+  P = { "<cmd>lua require'crates'.show_popup()<cr>", "[crates] show popup" },
+  i = { "<cmd>lua require'crates'.show_crate_popup()<cr>", "[crates] show info" },
+  f = { "<cmd>lua require'crates'.show_features_popup()<cr>", "[crates] show features" },
+  D = { "<cmd>lua require'crates'.show_dependencies_popup()<cr>", "[crates] show dependencies" },
+}
 
 -- map to global
 require("which-key").register({

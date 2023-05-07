@@ -83,7 +83,7 @@ M.config = function()
         "kylechui/nvim-surround",
       },
     },
-    {
+    { -- numb.nvim is a Neovim plugin that peeks lines of the buffer in non-obtrusive way.
       "nacro90/numb.nvim",
       event = "BufRead",
       config = function()
@@ -140,9 +140,7 @@ M.config = function()
         })
       end,
     },
-    {
-      "mrjones2014/nvim-ts-rainbow",
-    },
+    { "mrjones2014/nvim-ts-rainbow" },
     {
       "andymass/vim-matchup",
       event = "CursorMoved",
@@ -150,7 +148,7 @@ M.config = function()
         vim.g.matchup_matchparen_offscreen = { method = "popup" }
       end,
     },
-    "simrat39/rust-tools.nvim",
+    { "simrat39/rust-tools.nvim" },
     {
       "saecki/crates.nvim",
       tag = "v0.3.0",
@@ -216,6 +214,17 @@ M.config = function()
         require("todo-comments").setup()
       end,
     },
+    {
+      "zbirenbaum/copilot-cmp",
+      event = "InsertEnter",
+      dependencies = { "zbirenbaum/copilot.lua" },
+      config = function()
+        vim.defer_fn(function()
+          require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+          require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+        end, 100)
+      end,
+    },
     { "tpope/vim-repeat" },
     { "NLKNguyen/papercolor-theme" },  -- theme
     {
@@ -232,6 +241,12 @@ M.config = function()
         require("onedark").setup {
           style = "darker",
         }
+      end
+    },
+    { -- Standalone UI for nvim-lsp progress
+      'j-hui/fidget.nvim',
+      config = function()
+        require"fidget".setup{}
       end
     },
     -- { "hrsh7th/cmp-nvim-lsp-signature-help" },
