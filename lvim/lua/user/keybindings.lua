@@ -87,13 +87,16 @@ wkeymappings['e'] = { ':NvimTreeToggle<CR>', 'File explorer' }
 wkeymappings['o'] = { ':NvimTreeFocus<CR>', 'File explorer locate file' }
 
 -- telescope
-wkeymappings['f']['f'] = { ':Telescope find_files<cr>', 'Find Files' }
-wkeymappings['f']['o'] = { ':Telescope oldfiles<cr>', 'Find Old Files' }
-wkeymappings['f']['b'] = { ':Telescope buffers<cr>', 'Find Buffers' }
-wkeymappings['f']['h'] = { ':Telescope help_tags<cr>', 'Find Help' }
-wkeymappings['f']['w'] = { ':Telescope live_grep<cr>', 'Live Grep' }
-wkeymappings['f']['c'] = { ":Telescope git_status<cr>", "Open changed file" }
-wkeymappings['f']['P'] = { ":Telescope projects<CR>", "Projects" }
+wkeymappings['f'] = {
+  name = "Find file",
+  f = { ':Telescope find_files<cr>', 'Find Files' },
+  o = { ':Telescope oldfiles<cr>', 'Find Old Files' },
+  b = { ':Telescope buffers<cr>', 'Find Buffers' },
+  h = { ':Telescope help_tags<cr>', 'Find Help' },
+  w = { ':Telescope live_grep<cr>', 'Live Grep' },
+  c = { ":Telescope git_status<cr>", "Open changed file" },
+  p = { ":Telescope projects<CR>", "Projects" },
+}
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -282,8 +285,8 @@ lvim.builtin.which_key.vmappings["d"] = {
 }
 
 -- map to global
-require("which-key").register({
-  f = wkeymappings['f'],
-  g = wkeymappings['g'],
-  s = wkeymappings['s'],
-})
+-- require("which-key").register({
+--   f = wkeymappings['f'],
+--   g = wkeymappings['g'],
+--   s = wkeymappings['s'],
+-- })
