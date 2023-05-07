@@ -3,45 +3,17 @@
  `lvim` is the global options object
 ]]
 
--- vim options
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.relativenumber = false
-vim.opt.colorcolumn = "120"
-vim.opt.timeoutlen = 300
-
--- general
-lvim.log.level = "warn"
-lvim.format_on_save = {
-  enabled = true,
-  pattern = "*.lua",
-  timeout = 1000,
-}
-
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()" 
-
+lvim.colorscheme = "onedark"
+require("user.options")
 require("user.keybindings")
 
-lvim.keys.visual_mode["<leader>Sv"] = "<esc><cmd>lua require('spectre').open_visual()<CR>" -- Spectre config
-
--- lsp config
-lvim.keys.normal_mode["<leader>lD"] = ":lua vim.diagnostic.open_float()<CR>"
-
--------------------------------------------------------------------------------------
---
-lvim.builtin.which_key.mappings["lo"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
-
-
-lvim.colorscheme = "onedark"
 --------------------------------------------------------------------------------
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 lvim.builtin.treesitter.rainbow.enable = true
 lvim.builtin.treesitter.matchup.enable = true
 
@@ -376,14 +348,6 @@ lvim.builtin.which_key.mappings["G"] = { name = "Go" }
 -- lvim.builtin.which_key.mappings["D"] = { name = "Debug" }
 
 ------------------------------------------------------config rust ide over ------------------------------------------
-
--- Spectre key mapping here:
-lvim.builtin.which_key.mappings["S"] = {
-  name = "Spectre",
-  S = { "<cmd>lua require('spectre').open()<CR>", "Open Spectre" },
-  w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search current word" },
-  p = { "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", "Search on current file" },
-}
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",

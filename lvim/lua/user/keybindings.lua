@@ -26,6 +26,11 @@ wkeymappings['v'] = { name = 'visual' }
 wkeymappings['t'] = { name = 'trouble, todo' }
 wkeymappings['\\'] = { name = 'hop, register' }
 
+-- lsp
+lvim.keys.normal_mode["<leader>ld"] = ":lua vim.diagnostic.open_float()<CR>"
+lvim.keys.normal_mode["<leader>lf"] = ":lua vim.lsp.buf.format({ async = true })<CR>"
+lvim.keys.visual_mode["<leader>lf"] = ":lua vim.lsp.buf.format({silent = true, buffer = 0, normal = true})<CR>"
+lvim.builtin.which_key.mappings["lo"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
 
 -- remap macro record key
 keymap("n", "Q", "q")
@@ -184,28 +189,56 @@ end
 -- nvim-spectre
 local status_nvim_spectre_ok = pcall(require, 'spectre')
 if (status_nvim_spectre_ok) then
-  wkeymappings['s']['v'] = { ':lua require("spectre").open_visual()<cr>', 'Find text' }
-  wkeymappings['s']['p'] = { ':lua require("spectre").open_file_search()<cr>', 'Find text current file path' }
+  wkeymappings['s'] = {
+    name = "Spectre",
+    v = { ':lua require("spectre").open_visual()<cr>', 'Find text' },
+    p = { ':lua require("spectre").open_file_search({select_word=true})<cr>', 'Find text current file path' },
+    s = { "<cmd>lua require('spectre').open()<CR>", "Open Spectre" },
+    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search current word" },
+  }
+
+end
+
+-- nvim-surround-ui
+local surround_ok, surround = pcall(require, 'surround-ui')
+if surround_ok then
+  surround.setup {
+    root_key = 'S'
+  }
 end
 
 -- lspsaga
+-- TODO: https://github.com/nvimdev/lspsaga.nvim config more from this site
 local status_lspsaga_ok = pcall(require, "lspsaga")
 if status_lspsaga_ok then
-  keymap('n', '<C-j>', ':Lspsaga diagnostic_jump_next<CR>')
-  keymap('n', 'J', ':Lspsaga diagnostic_jump_prev<CR>')
+  keymap('n', '[e', ':Lspsaga diagnostic_jump_prev<CR>')
+  keymap('n', ']e', ':Lspsaga diagnostic_jump_next<CR>')
   keymap('n', '<C-k>', ':Lspsaga hover_doc ++quiet<CR>')
   -- removed
   -- https://github.com/glepnir/lspsaga.nvim/issues/502#issuecomment-1236949596
   -- keymap('i', '<C-k>', '<Cmd>Lspsaga signature_help<CR>')
-  keymap('i', '<C-k>', ':lua vim.lsp.buf.signature_help()<CR>')
+  -- keymap('i', '<C-k>', ':lua vim.lsp.buf.signature_help()<CR>')
   wkeymappings['l'] = {
-    d = { ':Lspsaga lsp_finder<cr>', 'LSP finder' },
+    D = { ':Lspsaga lsp_finder<cr>', 'LSP finder' },
     p = { ':Lspsaga peek_definition<cr>', 'Peek definition' },
     r = { ':Lspsaga rename<cr>', 'LSP rename' },
-    O = { ':Lspsaga outline<cr>', 'LSP ouline' },
+    -- O = { ':Lspsaga outline<cr>', 'LSP ouline' },
     a = { ':Lspsaga code_action<cr>', 'LSP code action' },
   }
 end
+
+-- visual-multi
+-- https://github.com/mg979/vim-visual-multi/wiki/Mappings#full-mappings-list
+vim.cmd([[
+  let g:VM_default_mappings = 0
+  let g:VM_maps = {}
+  let g:VM_maps["Find Under"] = ''
+  let g:VM_maps["Find Subword Under"] = ''
+]])
+wkeymappings['v']['d'] = { '<Plug>(VM-Find-Under)', 'select multi word, `n` next' }
+wkeymappings['v']['c'] = { '<Plug>(VM-Add-Cursor-At-Pos)', 'add cursor' }
+wkeymappings['v']['j'] = { '<Plug>(VM-Add-Cursor-Down)', 'add cursor down' }
+wkeymappings['v']['k'] = { '<Plug>(VM-Add-Cursor-Up)', 'add cursor up' }
 
 -- map to global
 require("which-key").register({

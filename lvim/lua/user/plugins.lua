@@ -7,9 +7,15 @@ M.config = function()
   -- end
   lvim.plugins = {
     {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
+    },
+    {
       "folke/trouble.nvim",
       cmd = "TroubleToggle",
     },
+    require("user.plugins.visual-multi"),
     {
       "rmagatti/goto-preview",
       config = function()
@@ -62,11 +68,20 @@ M.config = function()
       end,
     },
     {
-      "tpope/vim-surround",
-      -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
-      -- setup = function()
-        --  vim.o.timeoutlen = 500
-      -- end
+      "kylechui/nvim-surround",
+      event = "VeryLazy",
+      config = true,
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects", -- recommended
+      },
+    },
+    {
+      "roobert/surround-ui.nvim",
+      event = "VeryLazy",
+      dependencies = {
+        "folke/which-key.nvim",
+        "kylechui/nvim-surround",
+      },
     },
     {
       "nacro90/numb.nvim",
@@ -182,7 +197,7 @@ M.config = function()
     {
       "norcalli/nvim-colorizer.lua",
       config = function()
-        require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
+        require("colorizer").setup({ "css", "scss", "html", "javascript", "lua", "typescript" }, {
           RGB = true, -- #RGB hex codes
           RRGGBB = true, -- #RRGGBB hex codes
           RRGGBBAA = true, -- #RRGGBBAA hex codes
