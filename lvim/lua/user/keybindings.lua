@@ -242,7 +242,7 @@ wkeymappings['v']['k'] = { '<Plug>(VM-Add-Cursor-Up)', 'add cursor up' }
 
 -------------------------------------- language keybindings-------------------------------------
 -- Rust
-wkelmappings['r'] = {
+wkeymappings['r'] = {
   name = "Rust",
   r = { "<cmd>RustRunnables<Cr>", "Runnables" },
   t = { "<cmd>lua _CARGO_TEST()<cr>", "Cargo Test" },
