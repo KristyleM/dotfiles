@@ -15,6 +15,7 @@ M.config = function()
       "folke/trouble.nvim",
       cmd = "TroubleToggle",
     },
+    require("user.plugins.visual-multi"),
     {
       "rmagatti/goto-preview",
       config = function()
@@ -72,6 +73,14 @@ M.config = function()
       config = true,
       dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects", -- recommended
+      },
+    },
+    {
+      "roobert/surround-ui.nvim",
+      event = "VeryLazy",
+      dependencies = {
+        "folke/which-key.nvim",
+        "kylechui/nvim-surround",
       },
     },
     {
@@ -188,7 +197,7 @@ M.config = function()
     {
       "norcalli/nvim-colorizer.lua",
       config = function()
-        require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
+        require("colorizer").setup({ "css", "scss", "html", "javascript", "lua", "typescript" }, {
           RGB = true, -- #RGB hex codes
           RRGGBB = true, -- #RRGGBB hex codes
           RRGGBBAA = true, -- #RRGGBBAA hex codes

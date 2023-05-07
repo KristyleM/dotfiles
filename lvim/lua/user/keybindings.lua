@@ -199,6 +199,14 @@ if (status_nvim_spectre_ok) then
 
 end
 
+-- nvim-surround-ui
+local surround_ok, surround = pcall(require, 'surround-ui')
+if surround_ok then
+  surround.setup {
+    root_key = 'S'
+  }
+end
+
 -- lspsaga
 -- TODO: https://github.com/nvimdev/lspsaga.nvim config more from this site
 local status_lspsaga_ok = pcall(require, "lspsaga")
@@ -218,6 +226,19 @@ if status_lspsaga_ok then
     a = { ':Lspsaga code_action<cr>', 'LSP code action' },
   }
 end
+
+-- visual-multi
+-- https://github.com/mg979/vim-visual-multi/wiki/Mappings#full-mappings-list
+vim.cmd([[
+  let g:VM_default_mappings = 0
+  let g:VM_maps = {}
+  let g:VM_maps["Find Under"] = ''
+  let g:VM_maps["Find Subword Under"] = ''
+]])
+wkeymappings['v']['d'] = { '<Plug>(VM-Find-Under)', 'select multi word, `n` next' }
+wkeymappings['v']['c'] = { '<Plug>(VM-Add-Cursor-At-Pos)', 'add cursor' }
+wkeymappings['v']['j'] = { '<Plug>(VM-Add-Cursor-Down)', 'add cursor down' }
+wkeymappings['v']['k'] = { '<Plug>(VM-Add-Cursor-Up)', 'add cursor up' }
 
 -- map to global
 require("which-key").register({
