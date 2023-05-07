@@ -3,30 +3,10 @@
  `lvim` is the global options object
 ]]
 
--- vim options
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.relativenumber = false
-vim.opt.colorcolumn = "120"
-vim.opt.timeoutlen = 300
-
--- general
-lvim.log.level = "warn"
-lvim.format_on_save = {
-  enabled = true,
-  pattern = "*.lua",
-  timeout = 1000,
-}
-
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()" 
-
+lvim.colorscheme = "onedark"
+require("user.options")
 require("user.keybindings")
 
--------------------------------------------------------------------------------------
-
-lvim.colorscheme = "onedark"
 --------------------------------------------------------------------------------
 
 lvim.builtin.alpha.active = true
