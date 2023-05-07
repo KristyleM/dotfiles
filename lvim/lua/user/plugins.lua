@@ -7,6 +7,11 @@ M.config = function()
   -- end
   lvim.plugins = {
     {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
+    },
+    {
       "folke/trouble.nvim",
       cmd = "TroubleToggle",
     },
@@ -62,11 +67,12 @@ M.config = function()
       end,
     },
     {
-      "tpope/vim-surround",
-      -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
-      -- setup = function()
-        --  vim.o.timeoutlen = 500
-      -- end
+      "kylechui/nvim-surround",
+      event = "VeryLazy",
+      config = true,
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects", -- recommended
+      },
     },
     {
       "nacro90/numb.nvim",
