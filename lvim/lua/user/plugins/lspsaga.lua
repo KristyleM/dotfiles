@@ -55,6 +55,7 @@ return {
     -- breadcrumbs
     -- https://github.com/glepnir/lspsaga.nvim#lspsaga-symbols-in-winbar
     symbol_in_winbar = {
+      enable = false,
       separator = " " .. lvim.icons.ui.ChevronShortRight .. " ",
       color_mode = false,
     },
