@@ -180,6 +180,12 @@ plugins {
     compact-bar { path "compact-bar"; }
 }
 
+ui {
+    pane_frames {
+        rounded_corners true
+    }
+}
+
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
 // eg. when terminal window with an active zellij session is closed
 // Options:
@@ -264,7 +270,7 @@ plugins {
 // Valid values: positive integers
 // Default value: 10000
 //
-// scroll_buffer_size 10000
+scroll_buffer_size 1000000
 
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
