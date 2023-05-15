@@ -120,6 +120,12 @@ M.config = function()
         end,
     },
     {
+      "WhoIsSethDaniel/mason-tool-installer",
+      config = function()
+        require("user.plugins.lsp_signature").config()
+      end
+    },
+    {
       "s1n7ax/nvim-window-picker",
       version = "1.*",
       config = function()

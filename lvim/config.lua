@@ -119,3 +119,20 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "set tabstop=2  shiftwidth=2",
 })
 
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MasonToolsStartingInstall',
+  callback = function()
+    vim.schedule(function()
+      print 'mason-tool-installer is starting'
+    end)
+  end,
+})
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MasonToolsUpdateCompleted',
+  callback = function()
+    vim.schedule(function()
+      print 'mason-tool-installer has finished'
+    end)
+  end,
+})
