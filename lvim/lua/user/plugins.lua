@@ -122,7 +122,7 @@ M.config = function()
     {
       "WhoIsSethDaniel/mason-tool-installer",
       config = function()
-        require("user.plugins.lsp_signature").config()
+        require("user.plugins.mason_tool_installer").config()
       end
     },
     {
