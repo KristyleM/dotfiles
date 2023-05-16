@@ -29,7 +29,7 @@ wkeymappings['\\'] = { name = 'hop, register' }
 -- lsp
 lvim.keys.normal_mode["<leader>ld"] = ":lua vim.diagnostic.open_float()<CR>"
 lvim.keys.normal_mode["<leader>lf"] = ":lua vim.lsp.buf.format({ async = true })<CR>"
-lvim.keys.visual_mode["<leader>lf"] = ":lua vim.lsp.buf.format({silent = true, buffer = 0, normal = true})<CR>"
+lvim.keys.visual_mode["<leader>lf"] = ":lua require('user.utils').FormatSelection()<CR>"
 lvim.builtin.which_key.mappings["lo"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
 
 -- remap macro record key
