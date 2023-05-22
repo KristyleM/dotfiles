@@ -255,7 +255,7 @@ M.config = function()
         require"fidget".setup{}
       end
     },
-    -- { "hrsh7th/cmp-nvim-lsp-signature-help" },
+    { "hrsh7th/cmp-nvim-lsp-signature-help" },
     -- -----------------------------------------------------------
     -- Go language config following
     { "olexsmir/gopher.nvim" },
@@ -269,6 +269,7 @@ M.config = function()
     { "nvim-neotest/neotest" },
     { "nvim-neotest/neotest-python" },
     -- -----------------------------------------------------------
+    { "kshenoy/vim-signature" },
   }
 end
 
