@@ -10,9 +10,10 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.whichwrap = "<,>,[,]"
-vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "eol:↴"
+-- disable . \n to replace space and tldr
+-- vim.opt.list = true
+-- vim.opt.listchars:append "space:⋅"
+-- vim.opt.listchars:append "eol:↴"
 
 
 lvim.log.level = "warn"
