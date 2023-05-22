@@ -11,6 +11,8 @@ My dotfiles collection.
 `brew install ripgrep`
 `brew install bat`
 `brew install ranger`
-`brew install fzf`
 `brew install htop`
 
+### install fzf by git
+`git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf`
+`~/.fzf/install`
