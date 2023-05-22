@@ -172,7 +172,7 @@ local hop_ok = pcall(require, "hop")
 if hop_ok then
   opts = { silent = true }
   keymap("n", "\\s", "<cmd>HopChar2<CR>", { silent = true })
-  keymap("n", "\\gs", "<cmd>HopWordMW<CR>", { silent = true })
+  keymap("n", "\\gs", "<cmd>HopChar2MW<CR>", { silent = true })
 
   keymap("", "f", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", opts)
   keymap("", "F", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", opts)
