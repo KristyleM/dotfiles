@@ -9,7 +9,7 @@ M.config = function()
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
       after = "nvim-treesitter",
-      requires = "nvim-treesitter/nvim-treesitter",
+      dependencies = "nvim-treesitter/nvim-treesitter",
     },
     {
       "folke/trouble.nvim",
@@ -157,8 +157,8 @@ M.config = function()
     { "simrat39/rust-tools.nvim" },
     {
       "saecki/crates.nvim",
-      tag = "v0.3.0",
-      requires = { "nvim-lua/plenary.nvim" },
+      version = "v0.3.0",
+      dependencies = { "nvim-lua/plenary.nvim" },
       config = function()
         require("crates").setup {
           null_ls = {

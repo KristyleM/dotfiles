@@ -3,6 +3,26 @@
  `lvim` is the global options object
 ]]
 
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+-- lvim.builtin.indentlines.options = {
+--   space_char_blankline = " ",
+--   show_current_context = false,
+--   show_current_context_start = false,
+--   char_highlight_list = {
+--     "IndentBlanklineIndent1",
+--     "IndentBlanklineIndent2",
+--     "IndentBlanklineIndent3",
+--     "IndentBlanklineIndent4",
+--     "IndentBlanklineIndent5",
+--     "IndentBlanklineIndent6",
+--   },
+-- }
+
 lvim.colorscheme = "onedark"
 require("user.options")
 require("user.keybindings")
@@ -119,6 +139,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "set tabstop=2  shiftwidth=2",
 })
 
+vim.api.nvim_create_autocmd("User", {
+	-- pattern = "lua",
+	command = "hi clear CursorLine"
+})
+
+vim.api.nvim_create_autocmd("User", {
+	-- pattern = "lua",
+	command = "hi CursorLine gui=underline cterm=underline"
+})
+
 vim.api.nvim_create_autocmd('User', {
   pattern = 'MasonToolsStartingInstall',
   callback = function()
@@ -136,3 +166,5 @@ vim.api.nvim_create_autocmd('User', {
     end)
   end,
 })
+
+vim.cmd("hi CursorLine gui=underline cterm=underline")
