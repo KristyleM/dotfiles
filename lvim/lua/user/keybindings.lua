@@ -32,6 +32,8 @@ lvim.keys.normal_mode["<leader>lf"] = ":lua vim.lsp.buf.format({ async = true })
 lvim.keys.visual_mode["<leader>lf"] = ":lua require('user.utils').FormatSelection()<CR>"
 lvim.builtin.which_key.mappings["lo"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
 
+keymap("n", "H", "<CMD>bNext<CR>")
+keymap("n", "L", "<CMD>bnext<CR>")
 -- remap macro record key
 keymap("n", "Q", "q")
 
