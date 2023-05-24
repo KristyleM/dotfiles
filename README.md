@@ -12,6 +12,7 @@ My dotfiles collection.
 `brew install bat`
 `brew install ranger`
 `brew install htop`
+`brew install zoxide`
 
 ### install fzf by git
 `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf`
