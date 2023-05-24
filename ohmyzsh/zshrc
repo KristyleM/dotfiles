@@ -158,3 +158,6 @@ export PATH="/opt/homebrew/opt/icu4c/sbin:$PATH"
 # use custom tmux config
 export TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
+# add zoxide support 
+# to enable this, run `brew install zoxide`
+eval "$(zoxide init zsh)"
