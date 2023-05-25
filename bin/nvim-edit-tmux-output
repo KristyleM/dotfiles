@@ -4,4 +4,4 @@
 
 file=`mktemp`.sh
 tmux capture-pane -p > $file
-tmux new-window -n:nvim "nvim '+ normal G $' $file"
+tmux new-window -n:nvim "lvim '+ normal G $' $file"
