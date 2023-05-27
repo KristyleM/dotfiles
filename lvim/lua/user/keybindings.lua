@@ -26,7 +26,7 @@ wkeymappings['v'] = { name = 'visual' }
 wkeymappings['t'] = { name = 'trouble, todo' }
 wkeymappings['\\'] = { name = 'hop, register' }
 
-wkeymappings['g']['x'] = { "<cmd>b#", "go to pre buffer" },
+wkeymappings['g']['x'] = { "<cmd>b#", "go to pre buffer" }
 
 -- lsp
 lvim.keys.normal_mode["<leader>ld"] = ":lua vim.diagnostic.open_float()<CR>"
