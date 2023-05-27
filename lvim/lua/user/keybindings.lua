@@ -26,6 +26,8 @@ wkeymappings['v'] = { name = 'visual' }
 wkeymappings['t'] = { name = 'trouble, todo' }
 wkeymappings['\\'] = { name = 'hop, register' }
 
+wkeymappings['g']['x'] = { "<cmd>b#", "go to pre buffer" },
+
 -- lsp
 lvim.keys.normal_mode["<leader>ld"] = ":lua vim.diagnostic.open_float()<CR>"
 lvim.keys.normal_mode["<leader>lf"] = ":lua vim.lsp.buf.format({ async = true })<CR>"
@@ -168,6 +170,7 @@ if status_gitsigns_ok then
     d = { ":Gitsigns diffthis HEAD<cr>", "Git Diff" },
   }
 end
+
 
 -- hop
 local hop_ok = pcall(require, "hop")
