@@ -5,3 +5,6 @@
 [submodule "oh-my-tmux"]
 	path = oh-my-tmux
 	url = https://github.com/gpakosz/.tmux
+[submodule "tmux/plugins/tmux-tilish"]
+	path = tmux/plugins/tmux-tilish
+	url = git@github.com:jabirali/tmux-tilish.git
