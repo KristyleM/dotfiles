@@ -419,6 +419,10 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
+# config plugin tilish
+set -g @plugin 'jabirali/tmux-tilish'
+set -s escape-time 0
+set -g base-index 1
 
 
 # -- custom variables ----------------------------------------------------------
@@ -450,10 +454,10 @@ set -g @continuum-restore 'on'
 
 # custom keybindings here
 # Use Alt+h/j/k/l to switch panes
-bind -n M-h select-pane -L
-bind -n M-j select-pane -D
-bind -n M-k select-pane -U
-bind -n M-l select-pane -R
+# bind -n M-h select-pane -L
+# bind -n M-j select-pane -D
+# bind -n M-k select-pane -U
+# bind -n M-l select-pane -R
 
 # Save pane contents to a file and open in Neovim in a new tab
 bind-key C-z choose-buffer "capture-pane -S - -E - -b 1000000 -t 0; save-buffer /tmp/tmux-buffer$(date +%s); new-window -n 'nvim' 'nvim /tmp/tmux-buffer*'"
@@ -468,3 +472,15 @@ set -g pane-active-border-style 'fg=colour51,bg=colour236'
 
 setenv -g PATH "$HOME/.config/bin/:$PATH"
 bind-key C-e run-shell "nvim-edit-tmux-output"
+
+# tmux.nvim config, navigate between vim and tmux
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h' 'select-pane -L'
+bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j' 'select-pane -D'
+bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k' 'select-pane -U'
+bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l' 'select-pane -R'
+
+bind-key -T copy-mode-vi 'C-h' select-pane -L
+bind-key -T copy-mode-vi 'C-j' select-pane -D
+bind-key -T copy-mode-vi 'C-k' select-pane -U
+bind-key -T copy-mode-vi 'C-l' select-pane -R

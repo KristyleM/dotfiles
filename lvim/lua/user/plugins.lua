@@ -20,12 +20,12 @@ M.config = function()
       "rmagatti/goto-preview",
       config = function()
         require('goto-preview').setup {
-            width = 120; -- Width of the floating window
-            height = 25; -- Height of the floating window
-            default_mappings = true; -- Bind default mappings
-          debug = false; -- Print debug information
-          opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
-          post_open_hook = nil -- A function taking two arguments, a buffer and a window to be ran as a hook.
+          width = 120,             -- Width of the floating window
+          height = 25,             -- Height of the floating window
+          default_mappings = true, -- Bind default mappings
+          debug = false,           -- Print debug information
+          opacity = nil,           -- 0-100 opacity level of the floating window where 100 is fully transparent.
+          post_open_hook = nil     -- A function taking two arguments, a buffer and a window to be ran as a hook.
           -- You can use "default_mappings = true" setup option
           -- Or explicitly set keybindings
           -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
@@ -83,18 +83,19 @@ M.config = function()
         "kylechui/nvim-surround",
       },
     },
-    { -- numb.nvim is a Neovim plugin that peeks lines of the buffer in non-obtrusive way.
+    {
+      -- numb.nvim is a Neovim plugin that peeks lines of the buffer in non-obtrusive way.
       "nacro90/numb.nvim",
       event = "BufRead",
       config = function()
-      require("numb").setup {
-        show_numbers = true, -- Enable 'number' for the window while peeking
-        show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-      }
+        require("numb").setup {
+          show_numbers = true,    -- Enable 'number' for the window while peeking
+          show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+        }
       end,
     },
     {
-    "kevinhwang91/nvim-bqf",
+      "kevinhwang91/nvim-bqf",
       event = { "BufRead", "BufNew" },
       config = function()
         require("bqf").setup({
@@ -117,7 +118,7 @@ M.config = function()
             },
           },
         })
-        end,
+      end,
     },
     {
       "WhoIsSethDaniel/mason-tool-installer",
@@ -180,11 +181,12 @@ M.config = function()
     {
       "romgrk/nvim-treesitter-context",
       config = function()
-        require("treesitter-context").setup{
-          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        require("treesitter-context").setup {
+          enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
           throttle = true, -- Throttles plugin updates (may improve performance)
-          max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-          patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+          max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
+          patterns = {
+            -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
             -- For all filetypes
             -- Note that setting an entry here replaces all other patterns for this entry.
             -- By setting the 'default' entry below, you can control which nodes you want to
@@ -202,14 +204,14 @@ M.config = function()
       "norcalli/nvim-colorizer.lua",
       config = function()
         require("colorizer").setup({ "css", "scss", "html", "javascript", "lua", "typescript" }, {
-          RGB = true, -- #RGB hex codes
-          RRGGBB = true, -- #RRGGBB hex codes
+          RGB = true,      -- #RGB hex codes
+          RRGGBB = true,   -- #RRGGBB hex codes
           RRGGBBAA = true, -- #RRGGBBAA hex codes
-          rgb_fn = true, -- CSS rgb() and rgba() functions
-          hsl_fn = true, -- CSS hsl() and hsla() functions
-          css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-          }
+          rgb_fn = true,   -- CSS rgb() and rgba() functions
+          hsl_fn = true,   -- CSS hsl() and hsla() functions
+          css = true,      -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+          css_fn = true,   -- Enable all CSS *functions*: rgb_fn, hsl_fn
+        }
         )
       end,
     },
@@ -226,13 +228,13 @@ M.config = function()
       dependencies = { "zbirenbaum/copilot.lua" },
       config = function()
         vim.defer_fn(function()
-          require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+          require("copilot").setup()     -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
           require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
         end, 100)
       end,
     },
     { "tpope/vim-repeat" },
-    { "NLKNguyen/papercolor-theme" },  -- theme
+    { "NLKNguyen/papercolor-theme" }, -- theme
     {
       "windwp/nvim-spectre",
       event = "BufRead",
@@ -241,18 +243,19 @@ M.config = function()
       end,
     },
     { 'marko-cerovac/material.nvim' }, -- theme
-    { 
-      'navarasu/onedark.nvim', -- theme
+    {
+      'navarasu/onedark.nvim',         -- theme
       config = function()
         require("onedark").setup {
           style = "darker",
         }
       end
     },
-    { -- Standalone UI for nvim-lsp progress
+    {
+      -- Standalone UI for nvim-lsp progress
       'j-hui/fidget.nvim',
       config = function()
-        require"fidget".setup{}
+        require "fidget".setup {}
       end
     },
     -- { "hrsh7th/cmp-nvim-lsp-signature-help" },
@@ -270,8 +273,11 @@ M.config = function()
     { "nvim-neotest/neotest-python" },
     -- -----------------------------------------------------------
     { "kshenoy/vim-signature" },
+    {
+      "aserowy/tmux.nvim",
+      config = require("user.plugins.tmux").config(),
+    }
   }
 end
 
 return M
-
