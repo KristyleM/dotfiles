@@ -275,8 +275,10 @@ M.config = function()
     { "kshenoy/vim-signature" },
     {
       "aserowy/tmux.nvim",
-      config = require("user.plugins.tmux").config(),
-    }
+      config = function()
+        require("user.plugins.tmux").config()
+      end
+    },
   }
 end
 
