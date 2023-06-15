@@ -60,7 +60,7 @@ keymap("v", "<A-S-h>", "<Home>")
 
 -- better $
 keymap("n", "<S-l>", "<End>")
-keymap("i", "<S-l>", "<End>")
+-- keymap("i", "<S-l>", "<End>")
 keymap("v", "<S-l>", "<End><Left>")
 
 -- Resize window
