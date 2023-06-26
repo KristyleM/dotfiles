@@ -51,17 +51,17 @@ keymap("v", "d", '"_d')
 keymap("n", "X", "dd")
 
 -- better ^, move cursor to start of line
-keymap("n", "<S-h>", "^")
-keymap("i", "<S-h>", "<esc>^i")
-keymap("v", "<S-h>", "^")
-keymap("n", "<A-S-h>", "<Home>")
-keymap("i", "<A-S-h>", "<Home>")
-keymap("v", "<A-S-h>", "<Home>")
+-- keymap("n", "<S-h>", "^")
+-- keymap("i", "<C-h>", "<esc>^i")
+-- keymap("v", "<C-h>", "^")
+-- keymap("n", "<A-S-h>", "<Home>")
+-- keymap("i", "<A-S-h>", "<Home>")
+-- keymap("v", "<A-S-h>", "<Home>")
 
 -- better $
-keymap("n", "<S-l>", "<End>")
+-- keymap("n", "<S-l>", "<End>")
 -- keymap("i", "<S-l>", "<End>")
-keymap("v", "<S-l>", "<End><Left>")
+-- keymap("v", "<S-l>", "<End><Left>")
 
 -- Resize window
 keymap("n", "<C-left>", "<C-w><")
