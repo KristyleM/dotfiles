@@ -88,14 +88,14 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
-  zsh-vi-mode
+  # zsh-vi-mode
   fzf
 )
 
 # config fzf work with zsh-vi-mode
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+# zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 # ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-ZVM_VI_ESCAPE_BINDKEY=jk
+# ZVM_VI_ESCAPE_BINDKEY=jk
 
 source $ZSH/oh-my-zsh.sh
 
