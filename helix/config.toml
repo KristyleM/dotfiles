@@ -1,0 +1,63 @@
+theme = "onedark"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor]
+scrolloff = 6
+scroll-lines = 3
+mouse = true
+middle-click-paste = true
+shell = [ "sh", "-c" ]
+line-number = "absolute"
+cursorline = true
+cursorcolumn = false
+gutters = [ "diff", "line-numbers", "spacer", ]
+auto-completion = true
+auto-format = false
+rulers = [120]
+auto-save = true
+idle-timeout = 0
+completion-trigger-len = 2
+auto-info = true
+true-color = true
+bufferline = "always"
+color-modes = true
+auto-pairs = true
+
+[editor.statusline]
+separator = "|"
+mode.normal = "NORMAL"
+mode.select = "SELECT"
+mode.insert = "INSERT"
+
+left = [ "mode", "file-name", "separator", "spacer", "diagnostics", ]
+center = []
+right = [ "position", "separator",  "spacer", "position-percentage", "spacer", "separator",  "total-line-numbers", "separator",  "file-line-ending", "separator",  "file-type", ]
+
+[editor.lsp]
+display-messages = true
+auto-signature-help = true
+display-inlay-hints = true
+display-signature-help-docs = true
+
+[editor.file-picker]
+hidden = false
+
+[editor.whitespace.render]
+tab = "all"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+
+[editor.indent-guides]
+render = false
+character = "│"
+skip-levels = 0
+
