@@ -1,4 +1,4 @@
-theme = "onedark"
+theme = "my-onedark"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -33,7 +33,7 @@ mode.normal = "NORMAL"
 mode.select = "SELECT"
 mode.insert = "INSERT"
 
-left = [ "mode", "file-name", "separator", "spacer", "diagnostics", ]
+left = [ "mode", "file-name", "separator", "spacer", "version-control", "spacer", "separator", "spacer", "diagnostics", ]
 center = []
 right = [ "position", "separator",  "spacer", "position-percentage", "spacer", "separator",  "total-line-numbers", "separator",  "file-line-ending", "separator",  "file-type", ]
 
@@ -50,14 +50,14 @@ hidden = false
 tab = "all"
 
 [editor.whitespace.characters]
-space = "·"
+# space = "·"
 nbsp = "⍽"
-tab = "→"
+# tab = "→"
 newline = "⏎"
-tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+# tabpad = "·" # Tabs will look like "→···" (depending on tab width)
 
 [editor.indent-guides]
-render = false
+render = true
 character = "│"
 skip-levels = 0
 
