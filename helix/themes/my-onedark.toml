@@ -1,0 +1,5 @@
+inherits = "onedark"
+
+"diagnostic.error" = { fg = "errorfg", bg = "errorbg", underline = { color = "red" } }
+"ui.cursorline.primary" = { underline = { color = "white", style = "double_line" } }
+"ui.cursorline.secondary" = { underline = { color = "white", style = "line" } }
