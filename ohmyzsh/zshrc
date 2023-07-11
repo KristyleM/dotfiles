@@ -133,11 +133,13 @@ alias vi="/Users/heqilong/.local/bin/lvim"
 alias cat='bat --paging=never'
 alias zs='zellij --session'
 alias za='zellij attach'
+alias zn='zellij -s '
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export EDITOR=vim
+export EDITOR="/opt/homebrew/bin/hx"
+export VISUAL=$EDITOR
 export PATH=/Users/heqilong/.local/bin:$PATH
 export PATH=/Users/heqilong/go/bin:$PATH
 
