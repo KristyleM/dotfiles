@@ -11,7 +11,7 @@ scroll-lines = 3
 mouse = true
 middle-click-paste = true
 shell = [ "sh", "-c" ]
-line-number = "absolute"
+line-number = "relative"
 cursorline = true
 cursorcolumn = false
 gutters = [ "diff", "line-numbers", "spacer", ]
@@ -26,6 +26,7 @@ true-color = true
 bufferline = "always"
 color-modes = true
 auto-pairs = true
+soft-wrap.enable = true
 
 [editor.statusline]
 separator = "|"
@@ -61,3 +62,28 @@ render = true
 character = "│"
 skip-levels = 0
 
+[keys.normal]
+C-h = "jump_view_left"
+C-j = "jump_view_down"
+C-k = "jump_view_up"
+C-l = "jump_view_right"
+"%" = "match_brackets"
+V = ["select_mode", "extend_to_line_bounds"]
+G = "goto_file_end"
+
+# Search for word under cursor
+"*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
+"#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
+
+[keys.insert]
+C-h = "move_char_left"
+C-j = "move_line_down"
+C-k = "move_line_up"
+C-l = "move_char_right"
+
+[keys.select]
+G = "goto_file_end"
+
+# Visual-mode specific muscle memory
+i = "select_textobject_inner"
+a = "select_textobject_around"
