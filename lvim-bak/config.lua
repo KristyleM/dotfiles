@@ -46,21 +46,22 @@ table.insert(lvim.builtin.cmp.sources, {
 })
 
 -- Automatically install missing parsers when entering buffer
--- lvim.builtin.treesitter.auto_install = true
+lvim.builtin.treesitter.auto_install = true
 
--- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
+-- -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 require("user.plugins").config()
 
 
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
 
--- always installed on startup, useful for parsers without a strict filetype
+-- -- always installed on startup, useful for parsers without a strict filetype
 lvim.builtin.treesitter.ensure_installed = {
 	"comment",
 	"markdown_inline",
 	"regex",
 	"rust",
 	"go",
+	"gomod",
 	"python",
 	"html",
 	"json",
@@ -75,61 +76,61 @@ lvim.builtin.treesitter.ensure_installed = {
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
--- 	"rust_analyzer",
--- 	"gopls",
--- })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
+	"rust_analyzer",
+	"gopls",
+})
 
 
 ------------------------
 -- Format config
 ------------------------
--- local formatters = require("lvim.lsp.null-ls.formatters")
--- formatters.setup({
--- 	{ 
---     command = "stylua",
---     filetypes = { "lua" }
---   },
--- 	{
--- 		command = "goimports",
--- 		filetypes = { "go" },
--- 	},
--- 	{
--- 		command = "gofumpt",
--- 		filetypes = { "go" },
--- 	},
--- 	{
--- 		name = "black",
--- 		args = { "--line-length", "80" },
--- 		filetypes = { "python" },
--- 	},
--- })
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+	{ 
+    command = "stylua", 
+    filetypes = { "lua" } 
+  },
+	{
+		command = "goimports",
+		filetypes = { "go" },
+	},
+	{
+		command = "gofumpt",
+		filetypes = { "go" },
+	},
+	{
+		name = "black",
+		args = { "--line-length", "80" },
+		filetypes = { "python" },
+	},
+})
 
 ------------------------
 -- Linter config
 ------------------------
--- local linters = require("lvim.lsp.null-ls.linters")
--- linters.setup({
--- 	{
--- 		command = "flake8",
--- 		args = { "--max-line-length", "120" },
--- 		filetypes = { "python" },
--- 	},
--- })
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+	{
+		command = "flake8",
+		args = { "--max-line-length", "120" },
+		filetypes = { "python" },
+	},
+})
 
 ------------------------
 -- LSP
 ------------------------
 -- config skip lsp server
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
--- 	"rust_analyzer", -- rust
--- 	"gopls", -- go
--- })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
+	"rust_analyzer", -- rust
+	"gopls", -- go
+})
 
 -- language config
--- require("language.go") -- for go
--- require("language.rust") -- for rust
--- require("language.python") -- for python
+require("language.go") -- for go
+require("language.rust") -- for rust
+require("language.python") -- for python
 
 ---------------------------------------------------------------------------------
 
@@ -165,3 +166,5 @@ vim.api.nvim_create_autocmd('User', {
     end)
   end,
 })
+
+vim.cmd("hi CursorLine gui=underline cterm=underline")

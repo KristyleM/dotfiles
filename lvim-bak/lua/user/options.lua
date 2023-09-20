@@ -23,6 +23,4 @@ lvim.format_on_save = {
   timeout = 1000,
 }
 
--- config vim-matchup plugin
--- lvim.builtin.treesitter.matchup.enable = true
--- lvim.builtin.treesitter.rainbow.enable = true
+
