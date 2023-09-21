@@ -10,8 +10,8 @@ return {
   config = {
     request_timeout = 5000,
     scroll_preview = {
-      scroll_down = "<C-d>",
-      scroll_up = "<C-f>",
+      scroll_down = "<C-n>",
+      scroll_up = "<C-p>",
     },
     ui = {
       border = "rounded",

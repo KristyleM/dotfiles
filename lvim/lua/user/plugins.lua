@@ -100,37 +100,11 @@ M.config = function()
         }
       end
     },
-    -- previewing goto definition calls
-    {
-      "rmagatti/goto-preview",
-      config = function()
-      require('goto-preview').setup {
-            width = 120; -- Width of the floating window
-            height = 25; -- Height of the floating window
-            default_mappings = false; -- Bind default mappings
-            debug = false; -- Print debug information
-            opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
-            post_open_hook = nil -- A function taking two arguments, a buffer and a window to be ran as a hook.
-            -- You can use "default_mappings = true" setup option
-            -- Or explicitly set keybindings
-            -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-            -- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
-            -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
-        }
-      end
-    },
     -- hint when you type
     {
       "ray-x/lsp_signature.nvim",
       event = "BufRead",
       config = function() require"lsp_signature".on_attach() end,
-    },
-    -- a tree like view for symbols
-    {
-      "simrat39/symbols-outline.nvim",
-      config = function()
-        require('symbols-outline').setup()
-      end
     },
     -- ai plugin, github copilot
     {
@@ -148,17 +122,41 @@ M.config = function()
     { "tpope/vim-repeat" },
     -- mappings to delete, change and add surroundings
     {
-      "tpope/vim-surround",
-
-      -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
-      -- setup = function()
-        --  vim.o.timeoutlen = 500
-      -- end
+      "kylechui/nvim-surround",
+      event = "VeryLazy",
+      config = true,
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects", -- recommended
+      },
     },
     -- diagnostics, references, telescope results, quickfix and location lists
     {
       "folke/trouble.nvim",
         cmd = "TroubleToggle",
+    },
+    -- rust
+    { "simrat39/rust-tools.nvim" },
+    { "neovim/nvim-lspconfig" },
+    { "nvim-lua/plenary.nvim" },
+    { "mfussenegger/nvim-dap" },
+    -- lsp
+    require("user.plugins.lspsaga"),
+    -- Standalone UI for nvim-lsp progress
+    {
+      'j-hui/fidget.nvim',
+      version = "legacy",
+      event = "LspAttach",
+      dependencies = { "neovim/nvim-lspconfig" },
+      config = function()
+        require "fidget".setup {}
+      end
+    },
+    -- tmux config
+    {
+      "aserowy/tmux.nvim",
+      config = function()
+        require("user.plugins.tmux").config()
+      end
     },
   }
 end
