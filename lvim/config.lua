@@ -121,14 +121,14 @@ lvim.builtin.treesitter.ensure_installed = {
 -- LSP
 ------------------------
 -- config skip lsp server
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
--- 	"rust_analyzer", -- rust
--- 	"gopls", -- go
--- })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
+	"rust_analyzer", -- rust
+	-- "gopls", -- go
+})
 
 -- language config
 -- require("language.go") -- for go
--- require("language.rust") -- for rust
+require("language.rust") -- for rust
 -- require("language.python") -- for python
 
 ---------------------------------------------------------------------------------
