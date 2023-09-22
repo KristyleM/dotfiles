@@ -9,6 +9,8 @@ local keymap = function(mode, lhs, rhs, opts)
 end
 local wkeymappings = which_key.mappings
 
+keymap("n", "U", ':redo<CR>')
+
 -- move lines
 keymap("v", "<S-j>", ":m '>+1<CR>gv=gv")
 keymap("v", "<S-k>", ":m '<-2<CR>gv=gv")
