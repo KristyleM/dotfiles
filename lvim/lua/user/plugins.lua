@@ -27,7 +27,7 @@ M.config = function()
       end,
     },
     -- navigate and highlight matching words
-    -- with lvim.builtin.treesitter.matchup.enable = true in option 
+    -- with lvim.builtin.treesitter.matchup.enable = true in option
     -- {
     --   "andymass/vim-matchup",
     --   event = "CursorMoved",
@@ -53,7 +53,7 @@ M.config = function()
         "Glgrep",
         "Gedit"
       },
-      ft = {"fugitive"}
+      ft = { "fugitive" }
     },
     -- commentstring option based on the cursor location
     {
@@ -73,13 +73,13 @@ M.config = function()
     },
     -- Show current function at the top of the screen when function does not fit in screen
     {
-    "romgrk/nvim-treesitter-context",
+      "romgrk/nvim-treesitter-context",
       config = function()
-        require("treesitter-context").setup{
-          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        require("treesitter-context").setup {
+          enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
           throttle = true, -- Throttles plugin updates (may improve performance)
-          max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-          patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+          max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
+          patterns = {     -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
             -- For all filetypes
             -- Note that setting an entry here replaces all other patterns for this entry.
             -- By setting the 'default' entry below, you can control which nodes you want to
@@ -97,7 +97,7 @@ M.config = function()
     {
       "ray-x/lsp_signature.nvim",
       event = "BufRead",
-      config = function() require"lsp_signature".on_attach() end,
+      config = function() require "lsp_signature".on_attach() end,
     },
     -- ai plugin, github copilot
     {
@@ -106,7 +106,7 @@ M.config = function()
       dependencies = { "zbirenbaum/copilot.lua" },
       config = function()
         vim.defer_fn(function()
-          require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+          require("copilot").setup()     -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
           require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
         end, 100)
       end,
@@ -125,7 +125,7 @@ M.config = function()
     -- diagnostics, references, telescope results, quickfix and location lists
     {
       "folke/trouble.nvim",
-        cmd = "TroubleToggle",
+      cmd = "TroubleToggle",
     },
     -- rust
     { "simrat39/rust-tools.nvim" },
@@ -153,7 +153,7 @@ M.config = function()
     },
     {
       "ray-x/go.nvim",
-      dependencies = {  -- optional packages
+      dependencies = { -- optional packages
         "ray-x/guihua.lua",
         "neovim/nvim-lspconfig",
         "nvim-treesitter/nvim-treesitter",
@@ -161,8 +161,8 @@ M.config = function()
       config = function()
         require('go').setup()
       end,
-      event = {"CmdlineEnter"},
-      ft = {"go", 'gomod'},
+      event = { "CmdlineEnter" },
+      ft = { "go", 'gomod' },
       build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
     },
   }
