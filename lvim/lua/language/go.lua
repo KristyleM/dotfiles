@@ -1,12 +1,12 @@
 ------------------------
 -- Dap
 ------------------------
-local dap_ok, dapgo = pcall(require, "dap-go")
-if not dap_ok then
-  return
-end
+-- local dap_ok, dapgo = pcall(require, "dap-go")
+-- if not dap_ok then
+--   return
+-- end
 
-dapgo.setup()
+-- dapgo.setup()
 
 ------------------------
 -- LSP
@@ -50,22 +50,52 @@ lsp_manager.setup("gopls", {
         test = true,
         tidy = true,
       },
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      }
     },
   },
 })
 
-local status_ok, gopher = pcall(require, "gopher")
-if not status_ok then
-  return
-end
+-- local status_ok, gopher = pcall(require, "gopher")
+-- if not status_ok then
+--   return
+-- end
 
-gopher.setup {
-  commands = {
-    go = "go",
-    gomodifytags = "gomodifytags",
-    gotests = "gotests",
-    impl = "impl",
-    iferr = "iferr",
-  },
-}
+-- gopher.setup {
+--   commands = {
+--     go = "go",
+--     gomodifytags = "gomodifytags",
+--     gotests = "gotests",
+--     impl = "impl",
+--     iferr = "iferr",
+--   },
+-- }
 
+-- local ih = require("inlay-hints")
+-- local lspconfig = require("lspconfig")
+
+-- lspconfig.gopls.setup({
+--   on_attach = function(c, b)
+--     ih.on_attach(c, b)
+--   end,
+--   settings = {
+--     gopls = {
+--       hints = {
+--         assignVariableTypes = true,
+--         compositeLiteralFields = true,
+--         compositeLiteralTypes = true,
+--         constantValues = true,
+--         functionTypeParameters = true,
+--         parameterNames = true,
+--         rangeVariableTypes = true,
+--       },
+--     },
+--   },
+-- })
