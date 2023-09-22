@@ -9,6 +9,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
+vim.opt.wrap = true
 vim.opt.whichwrap = "<,>,[,]"
 -- disable . \n to replace space and tldr
 -- vim.opt.list = true
