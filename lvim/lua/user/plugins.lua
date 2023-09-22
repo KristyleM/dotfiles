@@ -8,8 +8,7 @@ M.config = function()
   lvim.plugins = {
     -- themes
     {
-      'navarasu/onedark.nvim',
-        config = function()
+      'navarasu/onedark.nvim', config = function()
         require("onedark").setup {
           style = "darker",
         }
@@ -139,6 +138,14 @@ M.config = function()
     { "neovim/nvim-lspconfig" },
     { "nvim-lua/plenary.nvim" },
     { "mfussenegger/nvim-dap" },
+    -- go
+    {
+      "olexsmir/gopher.nvim",
+      dependencies = { -- dependencies
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      },
+    },
     -- lsp
     require("user.plugins.lspsaga"),
     -- Standalone UI for nvim-lsp progress
@@ -157,6 +164,20 @@ M.config = function()
       config = function()
         require("user.plugins.tmux").config()
       end
+    },
+    {
+      "ray-x/go.nvim",
+      dependencies = {  -- optional packages
+        "ray-x/guihua.lua",
+        "neovim/nvim-lspconfig",
+        "nvim-treesitter/nvim-treesitter",
+      },
+      config = function()
+        require('go').setup()
+      end,
+      event = {"CmdlineEnter"},
+      ft = {"go", 'gomod'},
+      build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
     },
   }
 end

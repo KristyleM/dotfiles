@@ -123,11 +123,11 @@ lvim.builtin.treesitter.ensure_installed = {
 -- config skip lsp server
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
 	"rust_analyzer", -- rust
-	-- "gopls", -- go
+	"gopls", -- go
 })
 
 -- language config
--- require("language.go") -- for go
+require("language.go") -- for go
 require("language.rust") -- for rust
 -- require("language.python") -- for python
 
@@ -164,4 +164,14 @@ vim.api.nvim_create_autocmd('User', {
       print 'mason-tool-installer has finished'
     end)
   end,
+})
+
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').goimport()
+  end,
+  group = format_sync_grp,
 })
