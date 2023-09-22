@@ -8,8 +8,6 @@ M.config = function()
   lvim.plugins = {
     -- themes
     { "joshdick/onedark.vim" },
-    -- OSC52 copy from ssh
-    { "ojroques/vim-oscyank" },
     -- easy motion plugin
     {
       "phaazon/hop.nvim",
