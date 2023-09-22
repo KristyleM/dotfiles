@@ -7,13 +7,7 @@ M.config = function()
   -- end
   lvim.plugins = {
     -- themes
-    {
-      'navarasu/onedark.nvim', config = function()
-        require("onedark").setup {
-          style = "darker",
-        }
-      end
-    },
+    { "joshdick/onedark.vim" },
     -- easy motion plugin
     {
       "phaazon/hop.nvim",
@@ -138,14 +132,6 @@ M.config = function()
     { "neovim/nvim-lspconfig" },
     { "nvim-lua/plenary.nvim" },
     { "mfussenegger/nvim-dap" },
-    -- go
-    {
-      "olexsmir/gopher.nvim",
-      dependencies = { -- dependencies
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-      },
-    },
     -- lsp
     require("user.plugins.lspsaga"),
     -- Standalone UI for nvim-lsp progress
