@@ -23,7 +23,7 @@ vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 --   },
 -- }
 
-lvim.colorscheme = "onedark"
+lvim.colorscheme = "gruvbox"
 require("user.options")
 require("user.keybindings")
 
