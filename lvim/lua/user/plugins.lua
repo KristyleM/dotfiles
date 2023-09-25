@@ -7,7 +7,14 @@ M.config = function()
   -- end
   lvim.plugins = {
     -- themes
-    { "joshdick/onedark.vim" },
+    -- { "joshdick/onedark.vim" },
+    {
+      "folke/tokyonight.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {},
+    },
+    { "ellisonleao/gruvbox.nvim" },
     -- easy motion plugin
     {
       "phaazon/hop.nvim",
