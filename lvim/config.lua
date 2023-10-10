@@ -145,7 +145,7 @@ vim.api.nvim_create_autocmd("User", {
 
 vim.api.nvim_create_autocmd("User", {
 	-- pattern = "lua",
-	command = "hi CursorLine gui=underline cterm=underline"
+	command = "hi cursorline gui=underline guibg=none guisp=#00ff5f"
 })
 
 vim.api.nvim_create_autocmd('User', {
