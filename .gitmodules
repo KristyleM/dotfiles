@@ -8,3 +8,6 @@
 [submodule "tmux/plugins/tmux-tilish"]
 	path = tmux/plugins/tmux-tilish
 	url = git@github.com:jabirali/tmux-tilish.git
+[submodule "dictionaries"]
+	path = dictionaries
+	url = git@github.com:rime-aca/dictionaries.git
