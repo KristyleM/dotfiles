@@ -91,3 +91,30 @@ map({ "n", "v" }, "\\l", function ()
   require'hop'.hint_lines()
 end, { remap = true, desc = "Move to the start line you select." })
 
+-- goto-preview mapping config here, use plugin rmagatti/goto-preview
+local goto_preview = require('goto-preview')
+
+map({ "n" }, "gpd", function ()
+  goto_preview.goto_preview_definition()
+end, { remap = true, desc = "Go to preview definition." })
+
+map({ "n" }, "gpt", function ()
+  goto_preview.goto_preview_type_definition()
+end, { remap = true, desc = "Go to preview type definition." })
+
+map({ "n" }, "gpi", function ()
+  goto_preview.goto_preview_implementation()
+end, { remap = true, desc = "Go to preview implementation." })
+
+map({ "n" }, "gpD", function ()
+  goto_preview.goto_preview_declaration()
+end, { remap = true, desc = "Go to preview declaration." })
+
+map({ "n" }, "gpc", function ()
+  goto_preview.close_all_win()
+end, { remap = true, desc = "Close all float windows for goto-preview." })
+
+map({ "n" }, "gpr", function ()
+  goto_preview.goto_preview_references()
+end, { remap = true, desc = "Go to preview references." })
+
