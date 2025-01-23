@@ -11,6 +11,10 @@ map("i", "jj", "<Esc>")
 map("n", ";", ":", { desc = "CMD enter command mode" })
 -- map("n", "gb", "<C-o>", { desc = "jump jump back" })
 
+-- move lines
+map("v", "<S-j>", ":m '>+1<CR>gv=gv")
+map("v", "<S-k>", ":m '<-2<CR>gv=gv")
+
 --- Common mappings with `Ctrl` used in other apps
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>", { desc = "file save" })
 map({ "n", "i", "v" }, "<C-z>", "<cmd> undo <cr>", { desc = "history undo" })
@@ -117,4 +121,7 @@ end, { remap = true, desc = "Close all float windows for goto-preview." })
 map({ "n" }, "gpr", function ()
   goto_preview.goto_preview_references()
 end, { remap = true, desc = "Go to preview references." })
+
+-- outline mapping config here, use plugin hedyhli/outline.nvim
+map({ "n" }, "<leader>o", "<cmd>Outline<CR>", { remap = true, desc = "Toggle outline" })
 
