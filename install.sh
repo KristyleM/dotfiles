@@ -140,9 +140,21 @@ install_mimeapps() {
     link_file "$DOTFILES/mimeapps.list" "$HOME/.config/mimeapps.list"
 }
 
+install_nvim() {
+    info "安装 nvim 配置..."
+    local nvim_dst="$HOME/.config/nvim"
+    # 如果目标是独立 git 仓库，先备份整个目录
+    if [ -d "$nvim_dst/.git" ]; then
+        mkdir -p "$BACKUP_DIR"
+        mv "$nvim_dst" "$BACKUP_DIR/nvim"
+        warn "已备份 nvim 目录 (含 .git): $BACKUP_DIR/nvim"
+    fi
+    link_file "$DOTFILES/nvim" "$nvim_dst"
+}
+
 # ===================== 主逻辑 =====================
 
-ALL_MODULES=(zsh fzf git ranger rofi zellij fcitx5 rime go keyd scripts autostart mimeapps)
+ALL_MODULES=(zsh fzf git ranger rofi zellij fcitx5 rime go keyd scripts autostart mimeapps nvim)
 
 if [ $# -eq 0 ]; then
     info "安装全部模块..."
