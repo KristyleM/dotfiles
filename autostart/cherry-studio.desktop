@@ -1,0 +1,11 @@
+[Desktop Entry]
+  Type=Application
+  Name=Cherry Studio
+  Comment=A powerful AI assistant for producer.
+  Exec=/home/qilong/Applications/Cherry-Studio-1.7.19-x86_64_378858392e7204ce3503bec7ef2e5b09.AppImage
+  Icon=cherrystudio
+  Terminal=false
+  StartupNotify=false
+  Categories=Development;Utility;
+  X-GNOME-Autostart-enabled=true
+  Hidden=false

@@ -1,0 +1,9 @@
+[custom0]
+binding='<Super>c'
+command='/home/qilong/Scripts/switch-cherrystudio.sh'
+name='Switch to Cherry Studio'
+
+[custom1]
+binding='<Super>e'
+command='/home/qilong/Scripts/switch-edge.sh'
+name='Switch to Edge'

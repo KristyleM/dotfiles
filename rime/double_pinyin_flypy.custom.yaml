@@ -1,0 +1,15 @@
+patch:
+  translator/dictionary: rime_ice
+  translator/preedit_format: []
+  switches:
+    - name: ascii_mode
+      reset: 0
+      states: ["中文", "西文"]
+    - name: full_shape
+      states: ["半角", "全角"]
+    - name: simplification
+      reset: 1                  # 默认简体
+      states: ["漢字", "汉字"]
+    - name: ascii_punct
+      states: ["。，", "．，"]
+  switch_back: false

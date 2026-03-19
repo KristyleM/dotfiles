@@ -1,0 +1,13 @@
+patch:
+  schema_list:
+  - schema: double_pinyin_flypy # 小鹤
+  ascii_composer/switch_key:
+    Caps_Lock: clear
+    Shift_L: commit_code
+    Shift_R: commit_code
+    Control_L: noop
+    Control_R: noop
+    Eisu_toggle: clear
+  key_binder/bindings:
+    - { when: paging, accept: bracketleft, send: Page_Up }
+    - { when: has_menu, accept: bracketright, send: Page_Down }

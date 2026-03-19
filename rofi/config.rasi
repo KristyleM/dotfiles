@@ -1,0 +1,137 @@
+configuration {
+    /* 模式：应用启动 + 窗口切换 + 命令运行 */
+    modi: "drun,window,run,ssh";
+
+    /* 显示设置 */
+    show-icons: true;
+    icon-theme: "Adwaita";
+    display-drun: " Apps";
+    display-window: " Windows";
+    display-run: " Run";
+    display-ssh: " SSH";
+
+    /* 搜索行为 */
+    matching: "fuzzy";
+    sort: true;
+    sorting-method: "fzf";
+    case-sensitive: false;
+
+    /* 历史 */
+    disable-history: false;
+    max-history-size: 25;
+
+    /* 列数 */
+    drun-display-format: "{name}";
+    window-format: "{w}  {c}  {t}";
+
+    /* 快捷键 */
+    kb-row-up: "Up,Control+k";
+    kb-row-down: "Down,Control+j";
+    kb-accept-entry: "Return,KP_Enter";
+    kb-remove-to-eol: "";
+    kb-remove-char-back: "BackSpace";
+    kb-cancel: "Escape,Control+c";
+}
+
+/* =================== 主题 =================== */
+/* 基于 Nord 配色，居中浮动窗口 */
+
+* {
+    /* Nord 配色 */
+    bg:       #2e3440ee;
+    bg-alt:   #3b4252;
+    fg:       #eceff4;
+    fg-alt:   #d8dee9;
+    accent:   #88c0d0;
+    urgent:   #bf616a;
+
+    background-color: transparent;
+    text-color: @fg;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    location: center;
+    anchor: center;
+    width: 580px;
+    background-color: @bg;
+    border: 2px solid;
+    border-color: @accent;
+    border-radius: 12px;
+}
+
+inputbar {
+    padding: 14px 20px;
+    spacing: 12px;
+    children: [prompt, entry];
+    background-color: @bg-alt;
+    border-radius: 12px 12px 0 0;
+}
+
+prompt {
+    text-color: @accent;
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: #4c566a;
+}
+
+message {
+    border: 1px 0 0;
+    border-color: @bg-alt;
+    padding: 8px 20px;
+}
+
+listview {
+    lines: 8;
+    columns: 1;
+    fixed-height: true;
+    padding: 4px 0;
+    scrollbar: false;
+}
+
+element {
+    padding: 10px 20px;
+    spacing: 12px;
+}
+
+element selected normal {
+    background-color: @bg-alt;
+    text-color: @accent;
+    border-radius: 0;
+}
+
+element selected urgent {
+    background-color: @urgent;
+}
+
+element-icon {
+    size: 24px;
+    vertical-align: 0.5;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+}
+
+/* 模式切换栏 */
+mode-switcher {
+    padding: 4px 20px 10px;
+    spacing: 8px;
+    background-color: @bg-alt;
+}
+
+button {
+    padding: 6px 16px;
+    text-color: @fg-alt;
+    border-radius: 6px;
+}
+
+button selected {
+    background-color: @accent;
+    text-color: @bg;
+}
