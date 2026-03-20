@@ -152,9 +152,14 @@ install_nvim() {
     link_file "$DOTFILES/nvim" "$nvim_dst"
 }
 
+install_ghostty() {
+    info "安装 ghostty 配置..."
+    link_file "$DOTFILES/ghostty/config.ghostty" "$HOME/.config/ghostty/config.ghostty"
+}
+
 # ===================== 主逻辑 =====================
 
-ALL_MODULES=(zsh fzf git ranger rofi zellij fcitx5 rime go keyd scripts autostart mimeapps nvim)
+ALL_MODULES=(zsh fzf git ranger rofi zellij fcitx5 rime go keyd scripts autostart mimeapps nvim ghostty)
 
 if [ $# -eq 0 ]; then
     info "安装全部模块..."
