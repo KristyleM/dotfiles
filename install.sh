@@ -50,6 +50,7 @@ install_zsh() {
     link_file "$DOTFILES/zsh/.bashrc"          "$HOME/.bashrc"
     link_file "$DOTFILES/zsh/.pam_environment" "$HOME/.pam_environment"
     link_file "$DOTFILES/zsh/.xinputrc"        "$HOME/.xinputrc"
+    link_file "$DOTFILES/zsh/.p10k.zsh"        "$HOME/.p10k.zsh"
 }
 
 install_fzf() {
@@ -157,9 +158,20 @@ install_ghostty() {
     link_file "$DOTFILES/ghostty/config.ghostty" "$HOME/.config/ghostty/config.ghostty"
 }
 
+install_p10k() {
+    info "安装 powerlevel10k 主题..."
+    local p10k_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+    if [ -d "$p10k_dir" ]; then
+        ok "powerlevel10k 已存在: $p10k_dir"
+    else
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$p10k_dir"
+        ok "powerlevel10k 已克隆到: $p10k_dir"
+    fi
+}
+
 # ===================== 主逻辑 =====================
 
-ALL_MODULES=(zsh fzf git ranger rofi zellij fcitx5 rime go keyd scripts autostart mimeapps nvim ghostty)
+ALL_MODULES=(zsh fzf git ranger rofi zellij fcitx5 rime go keyd scripts autostart mimeapps nvim ghostty p10k)
 
 if [ $# -eq 0 ]; then
     info "安装全部模块..."

@@ -1,6 +1,6 @@
 patch:
   schema_list:
-  - schema: double_pinyin_flypy # 小鹤
+  - schema: wanxiang_pro
   ascii_composer/switch_key:
     Caps_Lock: clear
     Shift_L: commit_code
