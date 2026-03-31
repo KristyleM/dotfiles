@@ -52,17 +52,32 @@ RESET='\033[0m'
 kill_process() {
     local pid=$1
     local cmd=${PARENT_MAP[$pid]}
+    local timeout=5
+
     kill -15 "$pid" 2>/dev/null
-    if [ $? -eq 0 ]; then
-        echo -e "${GREEN}已杀掉${RESET} PID=${RED}$pid${RESET} ${CYAN}$cmd${RESET}"
-    else
-        echo -e "${YELLOW}尝试 kill -9 ...${RESET}"
-        kill -9 "$pid" 2>/dev/null
-        if [ $? -eq 0 ]; then
-            echo -e "${GREEN}已强制杀掉${RESET} PID=${RED}$pid${RESET} ${CYAN}$cmd${RESET}"
-        else
-            echo -e "${RED}无法杀掉${RESET} PID=$pid（权限不足？）"
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}无法杀掉${RESET} PID=$pid（权限不足？）"
+        return 1
+    fi
+
+    # 等待进程退出
+    echo -e "${YELLOW}已发送 SIGTERM，等待进程退出...${RESET} PID=${RED}$pid${RESET}"
+    for ((i = 0; i < timeout; i++)); do
+        if ! kill -0 "$pid" 2>/dev/null; then
+            echo -e "${GREEN}已杀掉${RESET} PID=${RED}$pid${RESET} ${CYAN}$cmd${RESET}"
+            return 0
         fi
+        sleep 1
+    done
+
+    # 超时，升级到 SIGKILL
+    echo -e "${YELLOW}SIGTERM 超时，尝试 kill -9 ...${RESET}"
+    kill -9 "$pid" 2>/dev/null
+    sleep 0.5
+    if ! kill -0 "$pid" 2>/dev/null; then
+        echo -e "${GREEN}已强制杀掉${RESET} PID=${RED}$pid${RESET} ${CYAN}$cmd${RESET}"
+    else
+        echo -e "${RED}无法杀掉${RESET} PID=$pid"
     fi
 }
 
