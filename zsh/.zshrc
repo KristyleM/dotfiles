@@ -93,11 +93,8 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+export VISUAL='nvim'
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -124,6 +121,9 @@ eval "$(pyenv virtualenv-init -)"
 # config go
 export PATH=$PATH:/usr/local/go/bin
 
+# Mason (nvim LSP server 管理器) 的可执行文件路径
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+
 # fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -141,5 +141,24 @@ function ra() {
     fi
 }
 
+# 解析前保存命令到历史，使语法错误的命令也能用上箭头召回
+_save_command_before_parse() {
+    [[ -n "$BUFFER" ]] && print -s -- "$BUFFER"
+    zle .accept-line
+}
+zle -N accept-line _save_command_before_parse
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# SSH to spider servers
+alias sshs='~/Scripts/ssh2spiders.sh'
+
+# Smart kill by keyword
+alias sk='~/Scripts/smart-kill.sh'
+
+# Proxy
+alias proxy='export http_proxy=http://127.0.0.1:7897 \
+  export https_proxy=http://127.0.0.1:7897 \
+  export all_proxy=socks5://127.0.0.1:7897'
+alias unproxy='unset http_proxy https_proxy all_proxy'
