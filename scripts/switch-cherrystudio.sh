@@ -1,13 +1,19 @@
 #!/bin/bash
-# 使用窗口类名（稳定可靠）
 WINDOW_CLASS="CherryStudio"
-# 查找窗口（-x 表示按类名匹配）
 WINDOW_ID=$(wmctrl -lx | grep "$WINDOW_CLASS" | head -n 1 | awk '{print $1}')
-if [ -n "$WINDOW_ID" ]; then
-    wmctrl -i -a "$WINDOW_ID"   # 切换到窗口
-    echo "✅ 已切换到正在运行的 CherryStudio"
-else
-    # 启动 AppImage
-    /home/qilong/Applications/CherryStudio.AppImage &
+
+if [ -z "$WINDOW_ID" ]; then
+    /home/qilong/Applications/Cherry-Studio-*.AppImage --no-sandbox &
     echo "🚀 已启动 CherryStudio"
+    exit 0
+fi
+
+# 检查窗口是否已激活
+ACTIVE_WINDOW=$(xdotool getactivewindow)
+if [ "$WINDOW_ID" = "$(printf '0x%08x' $ACTIVE_WINDOW)" ]; then
+    xdotool windowminimize "$ACTIVE_WINDOW"
+    echo "⬇️ 已最小化 CherryStudio"
+else
+    wmctrl -i -a "$WINDOW_ID"
+    echo "✅ 已切换到 CherryStudio"
 fi
